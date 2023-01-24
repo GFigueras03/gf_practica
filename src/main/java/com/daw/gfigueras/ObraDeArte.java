@@ -1,6 +1,8 @@
 package com.daw.gfigueras;
 
 public class ObraDeArte {
+    //!CONSTANTES
+    private final String FORMATO_VISUALIZAR = "Nombre: %s \nAutor: %s \nPrecio(€): %f \nAltura(m): %f \nPeso(t): %f \nNumero de piezas: %d \nDescripcion: %s";
     //!ATRIBUTES
     private int id;
     private int nPiezas;
@@ -13,7 +15,7 @@ public class ObraDeArte {
     private String descripcion;
 
     //*CONSTRUCTOR
-    public ObraDeArte(int id, int precio, int altura, int peso, int nPiezas, String tipo, String nombre, String autor,
+    public ObraDeArte(int id, Double precio, Double altura, Double peso, int nPiezas, String tipo, String nombre, String autor,
             String descripcion) {
         this.id = id;
         this.precio = precio;
@@ -99,6 +101,8 @@ public class ObraDeArte {
     }
 
     //?METHODS
-    
+    public String visualizarObra(){
+       return String.format(FORMATO_VISUALIZAR, this.nombre, this.autor, this.precio, this.altura, this.peso, this.nPiezas, this.descripcion);
+    }    
 
 }
