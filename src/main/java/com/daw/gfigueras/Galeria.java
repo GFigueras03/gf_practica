@@ -15,15 +15,19 @@ public class Galeria {
     final static private String TEXTO_TIPO          = "Introduce el tipo: ";
     final static private String TEXTO_AUTOR         = "Introduce el nombre del autor: ";
     final static private String TEXTO_DESCRIPCION   = "Introduce la descripcion de la obra: ";
+    final static private String TEXTO_ERROR         = "El tipo de obra es incorrecta, intentalo de nuevo. ";
 
     final static private int COMISION_GALERIA = 25;
-    final static private int DESCUENTO = 10;
+    final static private int DESCUENTO_PINTURA = 10;
+    final static private int DESCUENTO_ESCULTURA = 20;
+
+    public static ObraDeArte[] obrasGuardadas = new ObraDeArte[5];
     // !ATRIBUTOS
     private static int importe_peso;
     private static int importe_altura;
 
     public static void main(String[] args) {
-        System.out.println(mostrarObra(darAltaObra()));
+        System.out.println(mostrarObra(darAltaObra()));    
         
     }// *MAIN
 
@@ -33,13 +37,15 @@ public class Galeria {
                 obra.getPeso(), obra.getnPiezas(), obra.getDescripcion());
     }
 
-    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra) { //MOSTAR ETIQUETA VENTA
+    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, int descuento) { //MOSTAR ETIQUETA VENTA
         return String.format(FORMATO_ETIQUETA, obra.getNombre(), obra.getAltura(), obra.getPeso(), obra.getnPiezas(),
             obra.getPrecio(), (obra.getPrecio() * COMISION_GALERIA) / 100, calcularPrecioPeso(obra), calcularPrecioAltura(obra),
-            imprimirImporteAdiccional(obra), obtenerPrecioVenta(obra), DESCUENTO, obra.getNombre(), calcularDescuento(obra),
+            imprimirImporteAdiccional(obra), obtenerPrecioVenta(obra), DESCUENTO_ESCULTURA, obra.getNombre(), calcularDescuento(obra,DESCUENTO_ESCULTURA),
             calcularPrecioFinalVenta(obra));
     }
-
+    public static String obtenerTicket(ObraDeArte obra){
+        return "Nombre: " + obra.getNombre() + "\nAutor: " + obra.getAutor() + "\nDescripcion: " + obra.getDescripcion();
+    }
     public static double obtenerPrecioVenta(ObraDeArte obra) { //OBTENER PRECIO DE VENTA SIN PORCENTAJES FINALES
         double precio = obra.getPrecio();
         precio += ((obra.getPrecio() * COMISION_GALERIA) / 100); // INCREMENTO COMISION
@@ -60,13 +66,13 @@ public class Galeria {
         }
         return texto;
     }
-
-    public static double calcularDescuento(ObraDeArte obra) {
-        return ((obtenerPrecioVenta(obra) * DESCUENTO) / 100);
+    //CALCULOS
+    public static double calcularDescuento(ObraDeArte obra, int descuento) {
+        return ((obtenerPrecioVenta(obra) * DESCUENTO_ESCULTURA) / 100);
     }
 
     public static double calcularPrecioFinalVenta(ObraDeArte obra) {
-        return obtenerPrecioVenta(obra) - calcularDescuento(obra);
+        return obtenerPrecioVenta(obra) - calcularDescuento(obra, DESCUENTO_ESCULTURA);
     }
 
     public static int calcularPrecioPeso(ObraDeArte obra) { // METODO QUE DEVUELVE BOOLEAN SEGUN PESO
@@ -110,21 +116,21 @@ public class Galeria {
     }
     //METODOS SCANNER OBRA
     public static String imprimirString(String texto){
-        Scanner text = new Scanner(System.in);
+        Scanner textSc = new Scanner(System.in);
         System.out.println(texto);
-        String resultado = text.nextLine();
+        String resultado = textSc.nextLine();
         return resultado;
     }
     public static int imprimirInteger(String texto){
-        Scanner number = new Scanner(System.in);
+        Scanner numberSc = new Scanner(System.in);
         System.out.println(texto);
-        int resultado = number.nextInt();
+        int resultado = numberSc.nextInt();
         return resultado;
     }
     public static double imprimirDouble(String texto){
-        Scanner doubleSrc = new Scanner(System.in);
+        Scanner doubleSc = new Scanner(System.in);
         System.out.println(texto);
-        double resultado = doubleSrc.nextDouble();
+        double resultado = doubleSc.nextDouble();
         return resultado;
     }
 
@@ -141,8 +147,18 @@ public class Galeria {
         String descripcion  = imprimirString(TEXTO_DESCRIPCION);
 
         ObraDeArte obra = new ObraDeArte(id,precio,altura,peso,piezas,tipo,nombre,autor,descripcion);
+        checkTipos(obra);
+        obrasGuardadas[0] = obra;
         return obra;
-
     }
-
+    //CHECKEAR TIPO
+    public static void checkTipos(ObraDeArte obra){
+        if(!(obra.getTipo().equals("Escultura")) && !(obra.getTipo().equals("Pintura"))){
+            String tipo = imprimirString(TEXTO_ERROR);
+            obra.setTipo(tipo);
+            checkTipos(obra);
+        }else{
+            System.out.println("Tipo introducido correctamente.");
+        }
+    } 
 }

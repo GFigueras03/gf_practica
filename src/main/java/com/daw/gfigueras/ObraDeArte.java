@@ -21,7 +21,6 @@ public class ObraDeArte {
 
     //*CONSTRUCTOR
     public ObraDeArte(int id, Double precio, Double altura, Double peso, int nPiezas, String tipo, String nombre, String autor,String descripcion) throws IllegalArgumentException {
-        checkTipos();
         this.id = id;
         this.precio = precio;
         this.altura = altura;
@@ -107,11 +106,6 @@ public class ObraDeArte {
     }
 
     //?METHODS
-    public void checkTipos() throws IllegalArgumentException{
-        if((this.tipo != "Escultura") && (this.tipo != "Pintura")){
-            throw new IllegalArgumentException("La obra solo puede ser de tipo Escultura o Pintura");
-        }
-    }
    
 
 }
