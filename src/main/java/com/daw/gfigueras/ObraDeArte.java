@@ -2,7 +2,6 @@ package com.daw.gfigueras;
 
 public class ObraDeArte {
     //!CONSTANTES
-    private final String FORMATO_VISUALIZAR = "Nombre: %s \nAutor: %s \nPrecio(€): %f \nAltura(m): %f \nPeso(t): %f \nNumero de piezas: %d \nDescripcion: %s";
     //!ATRIBUTES
     protected int id;
     protected int nPiezas;
@@ -13,6 +12,12 @@ public class ObraDeArte {
     protected String nombre;
     protected String autor;
     protected String descripcion;
+
+    protected int importe_peso;
+    protected int importe_altura;
+
+    protected String[] esculturaMaterial = {"Hierro", "Cobre", "Acero"};
+    protected String[] pctoricaMaterial = {"Oleo", "Acuarela", "Carboncillo"};
 
     //*CONSTRUCTOR
     public ObraDeArte(int id, Double precio, Double altura, Double peso, int nPiezas, String tipo, String nombre, String autor,
@@ -27,6 +32,7 @@ public class ObraDeArte {
         this.autor = autor;
         this.descripcion = descripcion;
     }
+    
     //?GETTERS & SETTERS
     public int getId() {
         return id;
@@ -101,9 +107,44 @@ public class ObraDeArte {
     }
 
     //?METHODS
-    public String visualizarObra(){
-       return String.format(FORMATO_VISUALIZAR, this.nombre, this.autor, this.precio, this.altura, this.peso, this.nPiezas, this.descripcion);
-    }    
+    public int pesaMasde1Kg(ObraDeArte obra){ // METODO QUE DEVUELVE BOOLEAN SEGUN PESO
+        if((obra.getPeso() * 1000) >= 1){ // PESA MAS DE 1KG
+            importe_peso = 100;
+            return importe_peso;
+        }else{
+            importe_peso = 20;
+            return importe_peso;
+        }
+    }
+    public int alturaMasDe2m(ObraDeArte obra){
+        if((obra.getAltura() >= 2.0 )){
+            importe_altura = 100;
+            return importe_altura;
+        }
+        else{
+            importe_altura = 20;
+            return importe_altura;
+        }
+    }
+
+    public int plusNpiezas(ObraDeArte obra){
+        int precio = 0;
+        if (obra.getnPiezas() > 2) { //INCREMENTO NºPIEZAS
+            precio = (precio + ((obra.getnPiezas() -2 ) * 10));
+        }
+        return precio;
+    }
+    public String importeAdiccional(int nPiezas){
+        String texto = "";
+        if(nPiezas > 2 ){
+            for(int i = 3; i< nPiezas + 1; i++){
+                texto += "Importe adicional - Pieza " + i + " (€): 10\n";
+            }
+        }else{
+            texto = "";
+        }
+        return texto;
+    }
 
    
 
