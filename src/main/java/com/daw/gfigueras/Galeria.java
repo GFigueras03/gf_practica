@@ -4,4 +4,6 @@ public class Galeria {
        ObraDeArte obra1 = new ObraDeArte(01, 658.9, 14.2, 12.2, 12, "Escultura", "Guernica", "Pablo Picaso", "Obra rarita");
        System.out.println(obra1.visualizarObra());
     }
+
+    
 }
