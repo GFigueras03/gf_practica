@@ -42,6 +42,7 @@ public class ObraDeArte {
     }
 
     public double getPrecio() {
+        this.precio *= 0.99;
         return precio;
     }
 

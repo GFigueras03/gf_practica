@@ -30,22 +30,21 @@ public class Galeria {
     final static private int DESCUENTO_PINTURA          = 10;
     final static private int DESCUENTO_ESCULTURA        = 20;
 
-    public static ObraDeArte[] obrasGuardadas = new ObraDeArte[2];
-
     // !ATRIBUTOS
 
-    private static int importe_peso;
-    private static int importe_altura;
+    private static int importe_peso                     = 0;
+    private static int importe_altura                   = 0;
+    public static ObraDeArte[] obrasGuardadas           = new ObraDeArte[2];
+
 
     public static void main(String[] args) {
         ObraDeArte elPielRoja = new ObraDeArte(005, 350.0, 1.5, 0.05, 1, "Escultura", "El Piel Roja", "U.Checa",
                 "Escultura de U.Checa");
-        ObraDeArte elPielVerde = new ObraDeArte(006, 350.0, 1.5, 0.05, 1, "Pintura", "El Piel Verde", "U.Checa",
+        ObraDeArte elPielVerde = new ObraDeArte(006, 350.0, 1.5, 0.05, 12, "Pintura", "El Piel Verde", "U.Checa",
                 "Escultura de U.Checa");
 
         obrasGuardadas[0] = elPielRoja;
         obrasGuardadas[1] = elPielVerde;
-
         for (int i = 0; i < obrasGuardadas.length; i++) {
             hacerHerencia(obrasGuardadas[i], i);
             System.out.println(obtenerPrecioVentaEtiqueta(obrasGuardadas[i], darDescuento(obrasGuardadas[i])));
@@ -99,18 +98,17 @@ public class Galeria {
     }
 
     public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, int descuento) { //MUESTRA OBRA POR FORMATO ETIQUETA 
-        return BLANCO
-                + String.format(FORMATO_ETIQUETA, obra.getNombre(), obra.getAltura(), obra.getPeso(), obra.getnPiezas(),
-                        obra.getPrecio(), (obra.getPrecio() * COMISION_GALERIA) / 100, calcularPrecioPeso(obra),
-                        calcularPrecioAltura(obra),
-                        imprimirImporteAdiccional(obra), obtenerPrecioVenta(obra), descuento, obra.getTipo(),
-                        calcularDescuento(obra, descuento),
-                        calcularPrecioFinalVenta(obra));
+        return BLANCO + String.format(FORMATO_ETIQUETA, obra.getNombre(), obra.getAltura(), obra.getPeso(), obra.getnPiezas(),
+                obra.getPrecio(), (obra.getPrecio() * COMISION_GALERIA) / 100, calcularPrecioPeso(obra),
+                calcularPrecioAltura(obra),
+                imprimirImporteAdiccional(obra), obtenerPrecioVenta(obra), descuento, obra.getTipo(),
+                calcularDescuento(obra, descuento),
+                calcularPrecioFinalVenta(obra));
     }
 
     public static String obtenerTicket(ObraDeArte obra) {
         return "Nombre: " + obra.getNombre() + "\nAutor: " + obra.getAutor() + "\nDescripcion: "
-                + obra.getDescripcion();
+            + obra.getDescripcion();
     }
 
     public static double obtenerPrecioVenta(ObraDeArte obra) { // OBTENER PRECIO DE VENTA SIN PORCENTAJES FINALES
@@ -124,11 +122,13 @@ public class Galeria {
 
     public static String imprimirImporteAdiccional(ObraDeArte obra) {// IMPRIMIR N VECES TEXTO PIEZAS PARA ETIQUETA
         String texto = "";
+        int comienzoPlusPiezas = 3;
         if (obra.getnPiezas() > 2) {
-            for (int i = 3; i < obra.getnPiezas() + 1; i++) {
+            for (int i = comienzoPlusPiezas; i < obra.getnPiezas() + 1; i++) {
                 texto += "Importe adicional - Pieza " + i + " (€): 10\n";
             }
         } else {
+            
             texto = "";
         }
         return texto;

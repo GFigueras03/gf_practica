@@ -15,7 +15,8 @@ public class Pintura extends ObraDeArte{
         return tecnica;
     }
 
-    public void setTecnica(String tecnica) {
+    public void setTecnica (String tecnica) throws IllegalArgumentException{
+        checkTecnica(tecnica);
         this.tecnica = tecnica;
     }
     
