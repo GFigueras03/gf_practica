@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class Galeria {
     // !CONSTANTES
-    final static private String BLANCO                  = "\u001B[37m";
-    final static private String VERDE                   = "\u001B[32m";
+    final static private String BLANCO                  = "\u001B[37m";     
+    final static private String VERDE                   = "\u001B[32m";     
     final static private String ROJO                    = "\u001B[31m";
     final static private String MORADO                  = "\u001B[35m";
 
     final static private String FORMATO_VISUALIZAR      = "Nombre: %s \nAutor: %s \nPrecio(€): %f \nAltura(m): %f \nPeso(t): %f \nNumero de piezas: %d \nDescripcion: %s";
-    final static private String FORMATO_ETIQUETA        = "Nombre: %s \nAltura(m): %.2f \nPeso(t): %.2f \nNumero de Piezas: %d \nPrecio(€): %.2f \nComision Galeria(€): %.2f \nImporte por peso(€) %d \nImporte por altura(m): %d \n%sPrecio venta(€): %.2f \nDescuento(%d %s (€) %f \nPrecio final de venta(€): %.2f";
+    final static private String FORMATO_ETIQUETA        = "Nombre: %s \nAltura(m): %.2f \nPeso(t): %.2f \nNumero de Piezas: %d \nPrecio(€): %.2f \nComision Galeria(€): %.2f \nImporte por peso(€) %d \nImporte por altura(m): %d \n%sPrecio venta(€): %.2f \nDescuento(%d%% %s (€) %f \nPrecio final de venta(€): %.2f";
     final static private String TEXTO_NOMBRE            = "Introduce el nombre de la obra: ";
     final static private String TEXTO_ID                = "Introduce el ID de la obra: ";
     final static private String TEXTO_PRECIO            = "Introduce el precio de la obra(€): ";
@@ -25,10 +25,16 @@ public class Galeria {
     final static private String TEXTO_CORRECTO          = "Tipo introducido correctamente. ";
     final static private String TEXTO_MATERIAL          = "Introduce el Material de la escultura:(" + ROJO + "Hierro" + BLANCO+ " , " + ROJO + "Acero" + BLANCO + " o " + ROJO + "Cobre" + BLANCO + "): ";
     final static private String TEXTO_TECNICA           = "Introduce la Tecnica de la pintura:(" + ROJO + "Óleo" + BLANCO + " , "+ ROJO + "Acuarela" + BLANCO + " o " + ROJO + "Carboncillo" + BLANCO + "): ";
+    final static private String BIENVENIDO_GALERIA      = "Bienvenido al menu de la galeria JWD, ¿Que desea?:";
+    final static private String ESCULTURA_TRUE          = VERDE + "La escultura ha sido dada de alta correctamente: " + BLANCO;
+    final static private String PINTURA_TRUE            = VERDE + "La pintura ha sido dada de alta correctamente: " + BLANCO;
 
     final static private int COMISION_GALERIA           = 25;
     final static private int DESCUENTO_PINTURA          = 10;
     final static private int DESCUENTO_ESCULTURA        = 20;
+
+    final static private String CHECK_ESCULTURA        = "ESCULTURA";
+    final static private String CHECK_PINTURA          = "PINTURA";
 
     // !ATRIBUTOS
 
@@ -38,15 +44,9 @@ public class Galeria {
 
 
     public static void main(String[] args) {
-        ObraDeArte elPielRoja = new ObraDeArte(005, 350.0, 1.5, 0.05, 1, "Escultura", "El Piel Roja", "U.Checa",
-                "Escultura de U.Checa");
-        ObraDeArte elPielVerde = new ObraDeArte(006, 350.0, 1.5, 0.05, 12, "Pintura", "El Piel Verde", "U.Checa",
-                "Escultura de U.Checa");
-
-        obrasGuardadas[0] = elPielRoja;
-        obrasGuardadas[1] = elPielVerde;
+            
         for (int i = 0; i < obrasGuardadas.length; i++) {
-            hacerHerencia(obrasGuardadas[i], i);
+            obrasGuardadas[i] = darAltaObra();
             System.out.println(obtenerPrecioVentaEtiqueta(obrasGuardadas[i], darDescuento(obrasGuardadas[i])));
         }
 
@@ -62,33 +62,32 @@ public class Galeria {
         }
     }
 
-   
-    public static void hacerHerencia(ObraDeArte obra, int numero) {         //PASAS UNA OBRA Y UN NUMERO Y TE LA TRANSFORMA SEGUN SU TIPO Y LA METE EN EL ARRAY 
-        switch (obra.getTipo()) {
-            case "Pintura":
-                System.out.println("La obra es una pintura");
-                obrasGuardadas[numero] = crearPintura(obra);
-                break;
-            case "Escultura":
-                System.out.println("La obra es una escultura");
-                obrasGuardadas[numero] = crearEscultura(obra);
-                break;
-        }
-    }
+    // public static void hacerHerencia(ObraDeArte obra, int numero) {         //PASAS UNA OBRA Y UN NUMERO Y TE LA TRANSFORMA SEGUN SU TIPO Y LA METE EN EL ARRAY 
+    //     switch (obra.getTipo()) {
+    //         case "Pintura":
+    //             System.out.println("La obra es una pintura");
+    //             obrasGuardadas[numero] = crearPintura(obra);
+    //             break;
+    //         case "Escultura":
+    //             System.out.println("La obra es una escultura");
+    //             obrasGuardadas[numero] = crearEscultura(obra);
+    //             break;
+    //     }
+    // }
 
-    public static Escultura crearEscultura(ObraDeArte obra) {               //CREA UN OBJETO ESCULTURA A TRAVES DE UN OBJETO OBRA Y PREGUNTA POR MATERIAL
-        String material = imprimirString(TEXTO_MATERIAL);
-        Escultura escultura = new Escultura(obra.getId(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
-                obra.getnPiezas(), obra.getTipo(), obra.getNombre(), obra.getAutor(), obra.getDescripcion(), material);
-        return escultura;
-    }
+    // public static Escultura crearEscultura(ObraDeArte obra) {               //CREA UN OBJETO ESCULTURA A TRAVES DE UN OBJETO OBRA Y PREGUNTA POR MATERIAL
+    //     String material = imprimirString(TEXTO_MATERIAL);
+    //     Escultura escultura = new Escultura(obra.getId(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
+    //             obra.getnPiezas(), obra.getTipo(), obra.getNombre(), obra.getAutor(), obra.getDescripcion(), material);
+    //     return escultura;
+    // }
 
-    public static Pintura crearPintura(ObraDeArte obra) {                   //CREA UN OBJETO PINTURA A TRAVES DE UN OBJETO OBRA Y PREGUNTA POR TECNICA
-        String tecnica = imprimirString(TEXTO_TECNICA);
-        Pintura pintura = new Pintura(obra.getId(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
-                obra.getnPiezas(), obra.getTipo(), obra.getNombre(), obra.getAutor(), obra.getDescripcion(), tecnica);
-        return pintura;
-    }
+    // public static Pintura crearPintura(ObraDeArte obra) {                   //CREA UN OBJETO PINTURA A TRAVES DE UN OBJETO OBRA Y PREGUNTA POR TECNICA
+    //     String tecnica = imprimirString(TEXTO_TECNICA);
+    //     Pintura pintura = new Pintura(obra.getId(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
+    //             obra.getnPiezas(), obra.getTipo(), obra.getNombre(), obra.getAutor(), obra.getDescripcion(), tecnica);
+    //     return pintura;
+    // }
 
     // MOSTRAR OBRAS
     public static String mostrarObra(ObraDeArte obra) {                     //MUESTRA OBRA POR FORMATO CORTO 
@@ -204,20 +203,32 @@ public class Galeria {
         String nombre       = imprimirString(TEXTO_NOMBRE);
         String autor        = imprimirString(TEXTO_AUTOR);
         String descripcion  = imprimirString(TEXTO_DESCRIPCION);
+        
+        while(!(tipo.toUpperCase().equals(CHECK_ESCULTURA)) && !(tipo.toUpperCase().equals(CHECK_PINTURA))){
+            String tipoErroneo = imprimirString(ROJO + TEXTO_ERROR + BLANCO + "\n" + TEXTO_PREGUNTA);
+            tipo = tipoErroneo;
+        }
 
-        ObraDeArte obra = new ObraDeArte(id, precio, altura, peso, piezas, tipo, nombre, autor, descripcion);
-        checkTipos(obra);
-        return obra;
+        switch(tipo.toUpperCase()){
+            case CHECK_ESCULTURA:
+                String material = imprimirString(TEXTO_MATERIAL);
+                Escultura escultura = new Escultura(id, precio, altura, peso, piezas, tipo, nombre, autor, descripcion, material);
+                System.out.println(ESCULTURA_TRUE);
+                return escultura;
+            case CHECK_PINTURA:
+                String tecnica = imprimirString(TEXTO_TECNICA);
+                Pintura pintura =  new Pintura(id, precio, altura, peso, piezas, tipo, nombre, autor, descripcion, tecnica);
+                System.out.println(PINTURA_TRUE);
+                return pintura;
+            default: 
+                return null;
+        }
     }
 
     // CHECKEAR TIPO
-    public static void checkTipos(ObraDeArte obra) {
-        if (!(obra.getTipo().equals("Escultura")) && !(obra.getTipo().equals("Pintura"))) {
-            String tipo = imprimirString(ROJO + TEXTO_ERROR + BLANCO + "\n" + TEXTO_PREGUNTA);
-            obra.setTipo(tipo);
-            checkTipos(obra);
-        } else {
-            System.out.println(VERDE + TEXTO_CORRECTO + BLANCO);
-        }
+
+    // MENU
+    public static void ejecutarMenu(){
+        System.out.println(BIENVENIDO_GALERIA);
     }
 }
