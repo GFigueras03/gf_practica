@@ -26,7 +26,7 @@ public class Escultura extends ObraDeArte {
 
     //?METHODS
     private void checkMaterial(String material) throws IllegalArgumentException{
-        if(!(material == "Acero") && !(material == "Cobre") && !(material == "Hierro")){
+        if(!(material.equals("Acero")) && !(material.equals("Cobre")) && !(material.equals("Hierro"))){
             throw new IllegalArgumentException("EL material debe ser: Acero, Cobre o Hierro");
         }
     }
