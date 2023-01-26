@@ -29,17 +29,17 @@ public class Galeria {
     final static private String ESCULTURA_TRUE          = VERDE + "La escultura ha sido dada de alta correctamente: " + BLANCO;
     final static private String PINTURA_TRUE            = VERDE + "La pintura ha sido dada de alta correctamente: " + BLANCO;
 
-    final static private int COMISION_GALERIA           = 25;
+    final static private int COMISION_GALERIA_PERCENT   = 25;
     final static private int DESCUENTO_PINTURA          = 10;
     final static private int DESCUENTO_ESCULTURA        = 20;
+    final static private double DOLLAR                  = 0.99;
 
-    final static private String CHECK_ESCULTURA        = "ESCULTURA";
-    final static private String CHECK_PINTURA          = "PINTURA";
+    final static private String CHECK_ESCULTURA         = "ESCULTURA";
+    final static private String CHECK_PINTURA           = "PINTURA";
 
     // !ATRIBUTOS
-
-    private static int importe_peso                     = 0;
-    private static int importe_altura                   = 0;
+   
+   
     public static ObraDeArte[] obrasGuardadas           = new ObraDeArte[2];
 
 
@@ -62,60 +62,37 @@ public class Galeria {
         }
     }
 
-    // public static void hacerHerencia(ObraDeArte obra, int numero) {         //PASAS UNA OBRA Y UN NUMERO Y TE LA TRANSFORMA SEGUN SU TIPO Y LA METE EN EL ARRAY 
-    //     switch (obra.getTipo()) {
-    //         case "Pintura":
-    //             System.out.println("La obra es una pintura");
-    //             obrasGuardadas[numero] = crearPintura(obra);
-    //             break;
-    //         case "Escultura":
-    //             System.out.println("La obra es una escultura");
-    //             obrasGuardadas[numero] = crearEscultura(obra);
-    //             break;
-    //     }
-    // }
-
-    // public static Escultura crearEscultura(ObraDeArte obra) {               //CREA UN OBJETO ESCULTURA A TRAVES DE UN OBJETO OBRA Y PREGUNTA POR MATERIAL
-    //     String material = imprimirString(TEXTO_MATERIAL);
-    //     Escultura escultura = new Escultura(obra.getId(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
-    //             obra.getnPiezas(), obra.getTipo(), obra.getNombre(), obra.getAutor(), obra.getDescripcion(), material);
-    //     return escultura;
-    // }
-
-    // public static Pintura crearPintura(ObraDeArte obra) {                   //CREA UN OBJETO PINTURA A TRAVES DE UN OBJETO OBRA Y PREGUNTA POR TECNICA
-    //     String tecnica = imprimirString(TEXTO_TECNICA);
-    //     Pintura pintura = new Pintura(obra.getId(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
-    //             obra.getnPiezas(), obra.getTipo(), obra.getNombre(), obra.getAutor(), obra.getDescripcion(), tecnica);
-    //     return pintura;
-    // }
-
     // MOSTRAR OBRAS
     public static String mostrarObra(ObraDeArte obra) {                     //MUESTRA OBRA POR FORMATO CORTO 
         return "Mostrando Obra: \n" + String.format(FORMATO_VISUALIZAR, obra.getNombre(), obra.getAutor(),
                 obra.getPrecio(), obra.getAltura(),
                 obra.getPeso(), obra.getnPiezas(), obra.getDescripcion());
     }
-
-    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, int descuento) { //MUESTRA OBRA POR FORMATO ETIQUETA 
-        return BLANCO + String.format(FORMATO_ETIQUETA, obra.getNombre(), obra.getAltura(), obra.getPeso(), obra.getnPiezas(),
-                obra.getPrecio(), (obra.getPrecio() * COMISION_GALERIA) / 100, calcularPrecioPeso(obra),
-                calcularPrecioAltura(obra),
-                imprimirImporteAdiccional(obra), obtenerPrecioVenta(obra), descuento, obra.getTipo(),
-                calcularDescuento(obra, descuento),
-                calcularPrecioFinalVenta(obra));
-    }
-
     public static String obtenerTicket(ObraDeArte obra) {
         return "Nombre: " + obra.getNombre() + "\nAutor: " + obra.getAutor() + "\nDescripcion: "
             + obra.getDescripcion();
     }
 
+    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, int descuento) { //MUESTRA OBRA POR FORMATO ETIQUETA 
+        return BLANCO + String.format(FORMATO_ETIQUETA, obra.getNombre(), obra.getAltura(), obra.getPeso(), obra.getnPiezas(),
+            obra.getPrecio(), (obra.getPrecio() * COMISION_GALERIA_PERCENT) / 100, calcularPrecioPeso(obra),
+            calcularPrecioAltura(obra),
+            imprimirImporteAdiccional(obra), obtenerPrecioVenta(obra), descuento, obra.getTipo(),
+            calcularDescuento(obra, descuento),
+            calcularPrecioFinalVenta(obra));
+    }
+
     public static double obtenerPrecioVenta(ObraDeArte obra) { // OBTENER PRECIO DE VENTA SIN PORCENTAJES FINALES
+        double comisionGaleriaEuros = ((obra.getPrecio() * COMISION_GALERIA_PERCENT) / 100);
+        int importePeso = calcularPrecioPeso(obra);
+        int importeAltura = calcularPrecioAltura(obra);
+        int importePlusPiezas = calcularPlusPiezas(obra);
+
         double precio = obra.getPrecio();
-        precio += ((obra.getPrecio() * COMISION_GALERIA) / 100);
-        precio += calcularPrecioPeso(obra);
-        precio += calcularPrecioAltura(obra);
-        precio += calcularPlusPiezas(obra);
+        precio += comisionGaleriaEuros;
+        precio+= importeAltura;
+        precio+= importePeso;
+        precio += importePlusPiezas;
         return precio;
     }
 
@@ -142,32 +119,29 @@ public class Galeria {
         return obtenerPrecioVenta(obra) - calcularDescuento(obra, darDescuento(obra));
     }
 
+
     public static int calcularPrecioPeso(ObraDeArte obra) { // METODO QUE DEVUELVE BOOLEAN SEGUN PESO
         if ((obra.getPeso() * 1000) >= 1) {
-            importe_peso = 100;
-            return importe_peso;
+            return 100;
         } else {
-            importe_peso = 20;
-            return importe_peso;
+            return 20;
         }
     }
 
     public static int calcularPrecioAltura(ObraDeArte obra) { //METODO QUE DEVUELVE BOOLEAN SEGUN ALTURA
         if ((obra.getAltura() >= 2.0)) {
-            importe_altura = 100;
-            return importe_altura;
+            return 100;
         } else {
-            importe_altura = 20;
-            return importe_altura;
+            return 20;
         }
     }
 
     public static int calcularPlusPiezas(ObraDeArte obra) { //METODO QUE CALCULA PRECIO EXTRA POR MAS DE 2 PIEZAS
-        int precio = 0;
+        int plusPiezas = 0;
         if (obra.getnPiezas() > 2) { // INCREMENTO NºPIEZAS
-            precio = (precio + ((obra.getnPiezas() - 2) * 10));
+            plusPiezas+= (plusPiezas + ((obra.getnPiezas() - 2) * 10));
         }
-        return precio;
+        return plusPiezas;
     }
 
     // METODOS SCANNER OBRA
