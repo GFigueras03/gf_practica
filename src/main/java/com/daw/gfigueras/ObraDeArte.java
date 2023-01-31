@@ -42,11 +42,10 @@ public class ObraDeArte {
     }
 
     public double getPrecio() {
-        this.precio *= 0.99;
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -54,7 +53,7 @@ public class ObraDeArte {
         return altura;
     }
 
-    public void setAltura(int altura) {
+    public void setAltura(double altura) {
         this.altura = altura;
     }
 
@@ -62,7 +61,7 @@ public class ObraDeArte {
         return peso;
     }
 
-    public void setPeso(int peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
@@ -105,7 +104,6 @@ public class ObraDeArte {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     //?METHODS
    
 
