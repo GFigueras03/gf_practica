@@ -27,7 +27,10 @@ public class Pintura extends ObraDeArte{
         }
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + ", Tipo: " + getTipo() + ", Técnica: " + getTecnica();
+    }
 
     
 }

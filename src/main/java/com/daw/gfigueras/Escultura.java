@@ -30,4 +30,11 @@ public class Escultura extends ObraDeArte {
             throw new IllegalArgumentException("EL material debe ser: Acero, Cobre o Hierro");
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Tipo: " + getTipo() + ", Material: " + getMaterial();
+    }
+
+    
 }

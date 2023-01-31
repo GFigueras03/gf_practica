@@ -13,9 +13,6 @@ public class ObraDeArte {
     protected String autor;
     protected String descripcion;
 
-    protected int importe_peso;
-    protected int importe_altura;
-
     protected String[] esculturaMaterial = {"Hierro", "Cobre", "Acero"};
     protected String[] pctoricaMaterial = {"Oleo", "Acuarela", "Carboncillo"};
 
@@ -105,6 +102,13 @@ public class ObraDeArte {
         this.descripcion = descripcion;
     }
     //?METHODS
+
+    @Override
+    public String toString() {
+        return "ObraDeArte id=" + id + ", nPiezas=" + nPiezas + ", precio=" + precio + ", altura=" + altura + ", peso="
+                + peso + ", nombre=" + nombre + ", autor=" + autor + ", descripcion=" + descripcion;
+    }
+    
    
 
 }
