@@ -2,6 +2,8 @@ package com.daw.gfigueras;
 public class Escultura extends ObraDeArte {
 
     //!ATRIBUTES
+    private final double DESCUENTO = 0.20;
+    private final double SOBRECOSTE_ESCULTURA = 50.0;
     private String material;
 
     //*CONSTRUCTOR
@@ -30,7 +32,10 @@ public class Escultura extends ObraDeArte {
             throw new IllegalArgumentException("EL material debe ser: Acero, Cobre o Hierro");
         }
     }
-
+    @Override
+    public double calcularDescuento(double precio) {
+        return (precio * DESCUENTO) + SOBRECOSTE_ESCULTURA;
+    }
     @Override
     public String toString() {
         return super.toString() + ", Tipo: " + getTipo() + ", Material: " + getMaterial();

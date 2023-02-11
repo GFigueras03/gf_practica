@@ -1,6 +1,6 @@
 package com.daw.gfigueras;
 
-public class ObraDeArte {
+public abstract class ObraDeArte {
     //!CONSTANTES
     //!ATRIBUTES
     protected int id;
@@ -102,6 +102,7 @@ public class ObraDeArte {
         this.descripcion = descripcion;
     }
     //?METHODS
+    public abstract double calcularDescuento(double precio);
 
     @Override
     public String toString() {
