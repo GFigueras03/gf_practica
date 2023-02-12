@@ -103,6 +103,7 @@ public abstract class ObraDeArte {
     }
     //?METHODS
     public abstract double calcularDescuento(double precio);
+    public abstract double getDescuento();
 
     @Override
     public String toString() {

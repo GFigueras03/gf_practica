@@ -22,6 +22,11 @@ public class Pintura extends ObraDeArte{
         this.tecnica = tecnica;
     }
     
+   @Override
+   public double getDescuento() {
+       return (DESCUENTO * 100);
+   }
+
     //METHODS
     private void checkTecnica(String tecnica) throws IllegalArgumentException{
         if(!(tecnica.equals("Acuarela")) && !(tecnica.equals("Oleo")) && !(tecnica.equals("Carboncillo"))){

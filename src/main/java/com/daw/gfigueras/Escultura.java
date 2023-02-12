@@ -33,6 +33,11 @@ public class Escultura extends ObraDeArte {
         }
     }
     @Override
+    public double getDescuento() {
+        return (DESCUENTO * 100);
+    }
+
+    @Override
     public double calcularDescuento(double precio) {
         return (precio * DESCUENTO) + SOBRECOSTE_ESCULTURA;
     }

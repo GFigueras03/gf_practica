@@ -1,36 +1,45 @@
 package com.daw.gfigueras;
-
 import java.util.Scanner;
 
 public class Galeria {
     // !CONSTANTES
-    final static private String BLANCO                  = "\u001B[37m";
-    final static private String VERDE                   = "\u001B[32m";     
-    final static private String ROJO                    = "\u001B[31m";
-    final static private String MORADO                  = "\u001B[35m";
+    final static private String TEXTO_BLANCO            = "\u001B[37m";
+    final static private String TEXTO_VERDE             = "\u001B[32m";     
+    final static private String TEXTO_ROJO              = "\u001B[31m";
+    final static private String TEXTO_MORADO            = "\u001B[35m";
+    final static private String TEXTO_AMARILLO		    = "\u001B[33m";
+    final static private String	TEXTO_CYAN				= "\u001B[36m";
+    final static private String	FILTER_INVISIBLE	    = "\u001B[8m";
+    final static private String CLEAR_CONSOLE           = "\033[H\033[2J";
 
-    final static private String FORMATO_VISUALIZAR      = "Nombre: %s \nID: %d \nAutor: %s \nPrecio(€): %.2f \nAltura(m): %.2f \nPeso(t): %.2f \nNumero de piezas: %d \nDescripcion: %s\nTipo: %s";
-    final static private String FORMATO_ETIQUETA        = "Nombre: %s \nAltura(m): %.2f \nPeso(t): %.2f \nNumero de Piezas: %d \nPrecio(€): %.2f \nComision Galeria(€): %.2f \nImporte por peso(€) %d \nImporte por altura(m): %d \n%sPrecio venta(€): %.2f \nDescuento(%d%% %s (€) %f \nPrecio final de venta(€): %.2f";
+    final static private String GFIGUERAS               = "  ___ ___ ___ ___ _   _ ___ ___    _   ___ "+
+                                                          "\n / __| __|_ _/ __| | | | __| _ \\  /_\\ / __|"+
+                                                          "\n| (_ | _| | | (_ | |_| | _||   / / _ \\\\__ \\"+
+                                                          "\n \\___|_| |___\\___|\\___/|___|_|_\\/_/ \\_\\___/\n";
+ 
+    
+    final static private String FORMATO_VISUALIZAR      = TEXTO_CYAN+"Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"ID:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Autor:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Descripcion:"+TEXTO_BLANCO+" %s\n"+TEXTO_CYAN+"Tipo:"+TEXTO_BLANCO+" %s";
+    final static private String FORMATO_ETIQUETA        = TEXTO_CYAN + "Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de Piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Comision Galeria(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Importe por peso(EUR):"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Importe por altura(m):"+TEXTO_BLANCO+" %d \n%s"+TEXTO_CYAN+"Precio venta(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Descuento(%.0f%% %s (EUR)):"+TEXTO_BLANCO+" %f \n"+TEXTO_CYAN+"Precio final de venta(USD):"+TEXTO_BLANCO+" %.2f";
     final static private String TEXTO_NOMBRE            = "Introduce el nombre de la obra: ";
     final static private String TEXTO_ID                = "Introduce el ID de la obra: ";
     final static private String TEXTO_PRECIO            = "Introduce el precio de la obra(€): ";
     final static private String TEXTO_ALTURA            = "Introduce la altura de la obra(m): ";
     final static private String TEXTO_PESO              = "Introduce el peso de la obra(t): ";
     final static private String TEXTO_NºPIEZAS          = "Introduce el numero de piezas de la obra: ";
-    final static private String TEXTO_TIPO              = "Introduce el tipo(" + ROJO + "Escultura" + BLANCO + " o " + ROJO+ "Pintura" + BLANCO + "): ";
+    final static private String TEXTO_TIPO              = "Introduce el tipo(" + TEXTO_ROJO + "Escultura" + TEXTO_BLANCO + " o " + TEXTO_ROJO+ "Pintura" + TEXTO_BLANCO + "): ";
     final static private String TEXTO_AUTOR             = "Introduce el nombre del autor: ";
     final static private String TEXTO_DESCRIPCION       = "Introduce la descripcion de la obra: ";
     final static private String TEXTO_ERROR             = "El tipo de obra es incorrecta, intentalo de nuevo. ";
-    final static private String TEXTO_TIPO_INCORRECTO   = "Vuelve a introducir el tipo (" + ROJO + "Escultura" + BLANCO + " o "+ ROJO + "Pintura" + BLANCO + "): ";
+    final static private String TEXTO_TIPO_INCORRECTO   = "Vuelve a introducir el tipo (" + TEXTO_ROJO + "Escultura" + TEXTO_BLANCO + " o "+ TEXTO_ROJO + "Pintura" + TEXTO_BLANCO + "): ";
     final static private String TEXTO_CORRECTO          = "Tipo introducido correctamente. ";
-    final static private String TEXTO_MATERIAL          = "Introduce el Material de la escultura:(" + ROJO + "Hierro" + BLANCO+ " , " + ROJO + "Acero" + BLANCO + " o " + ROJO + "Cobre" + BLANCO + "): ";
-    final static private String TEXTO_TECNICA           = "Introduce la Tecnica de la pintura:(" + ROJO + "Óleo" + BLANCO + " , "+ ROJO + "Acuarela" + BLANCO + " o " + ROJO + "Carboncillo" + BLANCO + "): ";
-    final static private String BIENVENIDO_GALERIA      = MORADO + "Bienvenido al menu de la galeria JWD, ¿Que desea?:"+ BLANCO + " \n[0] Visualizar todas las obras de arte: \n[1] Dar de alta una obra: \n[2] Modificar los datos de una obra \n[3] Visualizar los datos de una obra: \n[4] Obtener el Precio de venta de una obra: \n[5] Imprimir etiqueta de una obra: \n[6] Salir: \n";
-    final static private String ESCULTURA_TRUE          = VERDE + "La escultura ha sido dada de alta correctamente: " + BLANCO;
-    final static private String PINTURA_TRUE            = VERDE + "La pintura ha sido dada de alta correctamente: " + BLANCO;
+    final static private String TEXTO_MATERIAL          = "Introduce el Material de la escultura:(" + TEXTO_ROJO + "Hierro" + TEXTO_BLANCO+ " , " + TEXTO_ROJO + "Acero" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Cobre" + TEXTO_BLANCO + "): ";
+    final static private String TEXTO_TECNICA           = "Introduce la Tecnica de la pintura:(" + TEXTO_ROJO + "Óleo" + TEXTO_BLANCO + " , "+ TEXTO_ROJO + "Acuarela" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Carboncillo" + TEXTO_BLANCO + "): ";
+    final static private String BIENVENIDO_GALERIA      = CLEAR_CONSOLE +TEXTO_CYAN + GFIGUERAS +TEXTO_BLANCO+ "\n"+TEXTO_BLANCO+ "Bienvenido al menu de la galeria"+ TEXTO_CYAN+ " JWD"+ TEXTO_BLANCO +", ¿Que desea?:"+ TEXTO_BLANCO + "\n\n- "+ TEXTO_CYAN + "[0]" + TEXTO_BLANCO +" - Visualizar todas las obras de arte: \n- "+TEXTO_CYAN+"[1]"+TEXTO_BLANCO +" - Dar de alta una obra: \n- "+TEXTO_CYAN+"[2]"+TEXTO_BLANCO +" - Modificar los datos de una obra \n- "+TEXTO_CYAN +"[3]"+TEXTO_BLANCO +" - Visualizar los datos de una obra: \n- "+TEXTO_CYAN +"[4]"+ TEXTO_BLANCO+" - Obtener el Precio de venta de una obra: \n- "+TEXTO_CYAN +"[5]"+TEXTO_BLANCO +" - Imprimir etiqueta de una obra: \n- "+TEXTO_CYAN+"[6]"+TEXTO_BLANCO+" - Salir: \n\n";
+    final static private String ESCULTURA_TRUE          = TEXTO_VERDE + "La escultura ha sido dada de alta correctamente: " + TEXTO_BLANCO;
+    final static private String PINTURA_TRUE            = TEXTO_VERDE + "La pintura ha sido dada de alta correctamente: " + TEXTO_BLANCO;
     final static private String MODIFICAR_OBRA_ID       = "Introduce el ID de la obra que quieres modificar: ";
-    final static private String ERROR_ID_SOLCITADO      = ROJO+"El ID solicitado no existe o esta fuera de rango " + BLANCO;
-    final static private String MENU_MODIFICAR          = MORADO+ "¿Qué campo deseas modificar?\n"+BLANCO+ "[0] Nombre:\n[1] ID:\n[2] Autor:\n[3] Precio:\n[4] Altura:\n[5] Peso:\n[6] NºPiezas:\n[7] Tipo:\n[8] Material/Técnica:\n[9] Descripcio:\n[10] Salir: \n";
+    final static private String ERROR_ID_SOLCITADO      = TEXTO_ROJO+"El ID solicitado no existe o esta fuera de rango " + TEXTO_BLANCO;
+    final static private String MENU_MODIFICAR          = TEXTO_MORADO+ "¿Qué campo deseas modificar?\n\n" + TEXTO_BLANCO + "- "+TEXTO_CYAN + "[0]"+TEXTO_BLANCO +"  - Nombre:\n- " + TEXTO_CYAN + "[1]"+ TEXTO_BLANCO+ "  - ID:\n-"+ TEXTO_CYAN + " [2]"+ TEXTO_BLANCO+"  - Autor:\n- "+ TEXTO_CYAN + "[3]"+ TEXTO_BLANCO +"  - Precio:\n- "+ TEXTO_CYAN +"[4]"+TEXTO_BLANCO +"  - Altura:\n- " + TEXTO_CYAN + "[5]"+TEXTO_BLANCO +"  - Peso:\n- " + TEXTO_CYAN + "[6]"+ TEXTO_BLANCO+ "  - NºPiezas:\n- "+ TEXTO_CYAN + "[7]"+ TEXTO_BLANCO + "  - Tipo:\n- "+ TEXTO_CYAN + "[8]"+TEXTO_BLANCO + "  - Material/Técnica:\n- "+ TEXTO_CYAN + "[9]"+ TEXTO_BLANCO + "  - Descripcio:\n- " + TEXTO_CYAN + "[10]"+ TEXTO_BLANCO + " - Salir: \n";
     final static private String CAMBIAR_ID              = "Introduce el nuevo ID que quieres modificar: \n";
     final static private String CAMBIAR_NOMBRE          = "Introduce el nuevo Nombre que quieres modificar :\n";
     final static private String CAMBIAR_AUTOR           = "Introduce el nuevo Autor que quieres modificar :\n";
@@ -39,22 +48,25 @@ public class Galeria {
     final static private String CAMBIAR_PESO            = "Introduce el nuevo Peso que quieres modificar :\n";
     final static private String CAMBIAR_NºPIEZAS        = "Introduce el nuevo NºPiezas que quieres modificar :\n";
     final static private String CAMBIAR_DESCRIPCION     = "Introduce la nueva Descripcion que quieres modificar :\n";
-    final static private String OPCION0_MENU            = "¿Qué obra quieres visualizar?, Introduce su ID :\n";
-    final static private String OPCION4_MENU            = "¿De qué obra quieres saber precio?, Introduce su ID :\n";
-    final static private String OPCION5_MENU            = "¿Qué obra quieres imprimir?, Introduce su ID :\n";
-    final static private String ERROR_ID_OBRA_ESCO      = ROJO+ "El id de la obra escogida es incorrecto"+ BLANCO;
+    final static private String OPCION0_MENU            = "¿Qué obra quieres visualizar?, Introduce su ID : ";
+    final static private String OPCION4_MENU            = "¿De qué obra quieres saber precio?, Introduce su ID : ";
+    final static private String OPCION5_MENU            = "¿Qué obra quieres imprimir?, Introduce su ID : ";
+    final static private String ERROR_ID_OBRA_ESCO      = TEXTO_ROJO+ "El id de la obra escogida es incorrecto"+ TEXTO_BLANCO;
+    final static private String VOLVER_MENU             = TEXTO_VERDE + "Pulsa 'ENTER' para volver al menu..."+  TEXTO_BLANCO + FILTER_INVISIBLE;
+    final static private String DAR_DE_ALTA_CORR        = TEXTO_VERDE + "La obra ha sido dada de alta correctamente...";
+    final static private String SALIR                   = "\nGRACIAS POR UTILIZAR NUESTRA APLICACION!!";
+    final static private String ERROR_MENU              = TEXTO_ROJO+"\nLA OPCION ESCOGIDA ES INCORRECTA, PRUEBA A ESCOGER DEL (0-6)";
 
     final static private String CHECK_ESCULTURA         = "ESCULTURA";
     final static private String CHECK_PINTURA           = "PINTURA";
 
     final static private int COMISION_GALERIA_PERCENT   = 25;
-    final static private int DESCUENTO_PINTURA          = 10;
-    final static private int DESCUENTO_ESCULTURA        = 20;
     final static private int PESO_PRECIO_MAX            = 100;
     final static private int PESO_PRECIO_MIN            = 20;
     final static private int ALTURA_PRECIO_MAX          = 100;
     final static private int ALTURA_PRECIO_MIN          = 20;
     final static private int ALTURA_PIEZAS_TOPE         = 2;
+    final static private double CONVERSOR_DOLARES       = 0.99;
 
     //ATRIBUTES
     public static AlmacenObras obrasGuardadas = new AlmacenObras();
@@ -76,10 +88,6 @@ public class Galeria {
         obrasGuardadas.push(obra3);
         obrasGuardadas.push(obra4);
         obrasGuardadas.push(obra5);
-
-            // ejecutarMenu();
-
-        // System.out.println(arrayObras.getObraDeArte()[2].getNombre());
         ejecutarMenu();
         
             
@@ -87,30 +95,23 @@ public class Galeria {
 
     // ?METODOS
     // RETORNAR DESCUENTO
-    public static int darDescuento(ObraDeArte obra) {
-        if (obra.getTipo().equals("Pintura")) {
-            return DESCUENTO_PINTURA;
-        } else {
-            return DESCUENTO_ESCULTURA;
-        }
-    }
 
     // MOSTRAR OBRAS
     public static String mostrarObra(ObraDeArte obra) { // MUESTRA OBRA POR FORMATO CORTO
-        return ROJO + "=====> Mostrando Obra <====== \n" + BLANCO + String.format(FORMATO_VISUALIZAR,
+        return TEXTO_VERDE + "\n=====> MOSTRANDO OBRA <====== \n\n" + TEXTO_BLANCO + String.format(FORMATO_VISUALIZAR,
                 obra.getNombre(), obra.getId(), obra.getAutor(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
-                obra.getnPiezas(), obra.getDescripcion(), obra.getTipo());
+                obra.getnPiezas(), obra.getDescripcion(), obra.getTipo() );
     }
 
     public static String obtenerTicket(ObraDeArte obra) {
-        return ROJO + "============\n" + BLANCO + "Nombre: " + obra.getNombre() + "\nAutor: " + obra.getAutor()
+        return TEXTO_VERDE + "\n===>ETIQUETA<===\n\n" + TEXTO_BLANCO + "Nombre: " + obra.getNombre() + "\nAutor: " + obra.getAutor()
                 + "\nDescripcion: " +
                 obra.getDescripcion() + "\n";
     }
 
-    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, int descuento) { // MUESTRA OBRA POR FORMATO
+    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, double descuento) { // MUESTRA OBRA POR FORMATO
                                                                                       // ETIQUETA
-        return ROJO + "==================\n" + BLANCO + String.format(FORMATO_ETIQUETA, obra.getNombre(),
+        return  TEXTO_VERDE + "\n===>PRECIO DE VENTA<===\n\n" + TEXTO_BLANCO + String.format(FORMATO_ETIQUETA, obra.getNombre(),
                 obra.getAltura(), obra.getPeso(), obra.getnPiezas(), obra.getPrecio(),
                 (obra.getPrecio() * COMISION_GALERIA_PERCENT) / 100, calcularPrecioPeso(obra),
                 calcularPrecioAltura(obra),
@@ -147,7 +148,8 @@ public class Galeria {
     // CALCULOS
 
     public static double calcularPrecioFinalVenta(ObraDeArte obra) {
-        return obtenerPrecioVenta(obra) - obra.calcularDescuento(obtenerPrecioVenta(obra));
+        double precio = obtenerPrecioVenta(obra) - obra.calcularDescuento(obtenerPrecioVenta(obra));
+        return precio * CONVERSOR_DOLARES;
     }
 
     public static int calcularPrecioPeso(ObraDeArte obra) { // METODO QUE DEVUELVE BOOLEAN SEGUN PESO
@@ -177,7 +179,7 @@ public class Galeria {
     // METODOS SCANNER OBRA
     public static String imprimirString(String texto) {
         Scanner textSc = new Scanner(System.in);
-        System.out.print(BLANCO + texto + MORADO);
+        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
         String resultado = textSc.nextLine();
 
         return resultado;
@@ -185,7 +187,7 @@ public class Galeria {
 
     public static int imprimirInteger(String texto) {
         Scanner numberSc = new Scanner(System.in);
-        System.out.print(BLANCO + texto + MORADO);
+        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
         int resultado = numberSc.nextInt();
 
         return resultado;
@@ -193,7 +195,7 @@ public class Galeria {
 
     public static double imprimirDouble(String texto) {
         Scanner doubleSc = new Scanner(System.in);
-        System.out.print(BLANCO + texto + MORADO);
+        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
         double resultado = doubleSc.nextDouble();
 
         return resultado;
@@ -203,15 +205,15 @@ public class Galeria {
     public static ObraDeArte darAltaObra() {
         boolean tipoEsCorrecto = false;
 
-        int id = imprimirInteger(TEXTO_ID);
-        int piezas = imprimirInteger(TEXTO_NºPIEZAS);
-        double precio = imprimirDouble(TEXTO_PRECIO);
-        double altura = imprimirDouble(TEXTO_ALTURA);
-        double peso = imprimirDouble(TEXTO_PESO);
-        String tipo = imprimirString(TEXTO_TIPO);
-        String nombre = imprimirString(TEXTO_NOMBRE);
-        String autor = imprimirString(TEXTO_AUTOR);
-        String descripcion = imprimirString(TEXTO_DESCRIPCION);
+        int id              = imprimirInteger(TEXTO_ID);
+        int piezas          = imprimirInteger(TEXTO_NºPIEZAS);
+        double precio       = imprimirDouble(TEXTO_PRECIO);
+        double altura       = imprimirDouble(TEXTO_ALTURA);
+        double peso         = imprimirDouble(TEXTO_PESO);
+        String tipo         = imprimirString(TEXTO_TIPO);
+        String nombre       = imprimirString(TEXTO_NOMBRE);
+        String autor        = imprimirString(TEXTO_AUTOR);
+        String descripcion  = imprimirString(TEXTO_DESCRIPCION);
 
         ObraDeArte obra = null;
 
@@ -222,6 +224,7 @@ public class Galeria {
                     obra = new Escultura(id, precio, altura, peso, piezas, tipo, nombre, autor, descripcion,
                             material);
                     System.out.println(ESCULTURA_TRUE);
+                    volverAlMenu();
                     tipoEsCorrecto = true;
                     break;
                 case CHECK_PINTURA:
@@ -229,6 +232,7 @@ public class Galeria {
                     obra = new Pintura(id, precio, altura, peso, piezas, tipo, nombre, autor, descripcion,
                             tecnica);
                     System.out.println(PINTURA_TRUE);
+                    volverAlMenu();
                     tipoEsCorrecto = true;
                     break;
                 default:
@@ -237,13 +241,12 @@ public class Galeria {
                     break;
             }
         }while(!tipoEsCorrecto);
-        
         return obra;
     }
 
     public static void modificarDatos() {
         boolean menu = true;
-        int idPedido = imprimirInteger(MODIFICAR_OBRA_ID);
+        int idPedido = imprimirInteger(CLEAR_CONSOLE + MODIFICAR_OBRA_ID);
 
         if (idPedido > obrasGuardadas.getTam() - 1) {
             System.out.println(ERROR_ID_SOLCITADO);
@@ -334,6 +337,12 @@ public class Galeria {
 
     // CHECKEAR TIPO
 
+    public static void volverAlMenu(){
+        String limpiar = imprimirString("\n" + VOLVER_MENU);
+        System.out.println("\u001B[0m");
+        ejecutarMenu();
+
+    }
     // MENU
     public static void ejecutarMenu() {
         while (menu == true) {
@@ -341,6 +350,7 @@ public class Galeria {
             switch (option) {
                 case 0:
                     mostrarTodasLasObras();
+                    volverAlMenu();
                     break;
                 case 1:
                     obrasGuardadas.push(darAltaObra());
@@ -348,47 +358,51 @@ public class Galeria {
                 case 2:
                     modificarDatos();
                     break;
+
                 case 3:
-                    int obraEscogida = imprimirInteger(OPCION0_MENU);
+                    int obraEscogida = imprimirInteger(CLEAR_CONSOLE + OPCION0_MENU);
                     for (int i = 0; i < obrasGuardadas.getTam(); i++) {
                         if (obrasGuardadas.getObra(i).getId() == obraEscogida) {
                             System.out.println(mostrarObra(obrasGuardadas.getObra(i)));
-                            ejecutarMenu();
-                        }
-                        
+                            volverAlMenu();
+                        } 
                     }
-
                     break;
                 case 4:
-                    int obraEscogidaDos = imprimirInteger(OPCION4_MENU);
+                    int obraEscogidaDos = imprimirInteger(CLEAR_CONSOLE + OPCION4_MENU);
                     for (int i = 0; i < obrasGuardadas.getTam(); i++) {
                         if (obrasGuardadas.getObra(i).getId() == obraEscogidaDos) {
                             System.out.println(
-                                    obtenerPrecioVentaEtiqueta(obrasGuardadas.getObra(i), darDescuento(obrasGuardadas.getObra(i))));
-                            ejecutarMenu();
+                                    obtenerPrecioVentaEtiqueta(obrasGuardadas.getObra(i), obrasGuardadas.getObra(i).getDescuento()));
+                           volverAlMenu();
                         }
                     }
                     break;
                 case 5:
-                    int obraEscogidaTres = imprimirInteger(OPCION5_MENU);
+                    int obraEscogidaTres = imprimirInteger(CLEAR_CONSOLE + OPCION5_MENU);
                     for (int i = 0; i < obrasGuardadas.getTam(); i++) {
                         if (obrasGuardadas.getObra(i).getId() == obraEscogidaTres) {
                             System.out.println(obtenerTicket(obrasGuardadas.getObra(i)));
-                            ejecutarMenu();
+                            volverAlMenu();
                         }
                     }
                     break;
                 case 6:
-                    System.out.println("GRACIAS POR UTILIZAR NUESTRA APLICACION");
+                    System.out.println(TEXTO_AMARILLO + SALIR + TEXTO_BLANCO);
                     menu = false;
+                    break;
+                default:
+                    System.out.println(ERROR_MENU);
+                    volverAlMenu();
                     break;
             }
         }
     }
 
     public static void mostrarTodasLasObras() { // MOSTRAR OBRAS PARA EL MENU
+        System.out.println(TEXTO_VERDE+"\n=====> Mostrando Obras <======\n");
         for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-            System.out.println(BLANCO + obrasGuardadas.getObra(i).getNombre());
+            System.out.println(TEXTO_BLANCO + obrasGuardadas.getObra(i).getNombre());
         }
     }
 }
