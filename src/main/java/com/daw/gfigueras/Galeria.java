@@ -69,7 +69,7 @@ public class Galeria {
     final static private double CONVERSOR_DOLARES       = 0.99;
 
     //ATRIBUTES
-    public static AlmacenObras obrasGuardadas = new AlmacenObras();
+    public static AlmacenObras obrasGuardadas           = new AlmacenObras();
     public static Escultura[] esculturasGuardadas       = new Escultura[1];
     public static Pintura[] PinturasGuardadas           = new Pintura[1];
     public static String[][] obrasMatrix                = new String[6][5];
@@ -224,7 +224,6 @@ public class Galeria {
                     obra = new Escultura(id, precio, altura, peso, piezas, tipo, nombre, autor, descripcion,
                             material);
                     System.out.println(ESCULTURA_TRUE);
-                    volverAlMenu();
                     tipoEsCorrecto = true;
                     break;
                 case CHECK_PINTURA:
@@ -232,7 +231,6 @@ public class Galeria {
                     obra = new Pintura(id, precio, altura, peso, piezas, tipo, nombre, autor, descripcion,
                             tecnica);
                     System.out.println(PINTURA_TRUE);
-                    volverAlMenu();
                     tipoEsCorrecto = true;
                     break;
                 default:
@@ -354,6 +352,7 @@ public class Galeria {
                     break;
                 case 1:
                     obrasGuardadas.push(darAltaObra());
+                    volverAlMenu();
                     break;
                 case 2:
                     modificarDatos();
