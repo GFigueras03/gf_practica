@@ -2,13 +2,13 @@ package com.daw.gfigueras;
 
 public abstract class ObraDeArte {
     //!CONSTANTES
-    final static private int PESO_PRECIO_MAX            = 100;
-    final static private int PESO_PRECIO_MIN            = 20;
-    final static private int ALTURA_PRECIO_MAX          = 100;
-    final static private int ALTURA_PRECIO_MIN          = 20;
-    final static private int ALTURA_PIEZAS_TOPE         = 2;
-    final static private String PLUS_PIEZAS_TEXTO       = Galeria.TEXTO_CYAN + "Importe adicional - Pieza " + Galeria.TEXTO_AMARILLO;
-    final static private String PLUS_PIEZAS_TEXTO_DOS   = Galeria.TEXTO_CYAN + " (EUR): "+Galeria.TEXTO_POR_DEFECTO + "10\n";
+    final private int PESO_PRECIO_MAX            = 100;
+    final private int PESO_PRECIO_MIN            = 20;
+    final private int ALTURA_PRECIO_MAX          = 100;
+    final private int ALTURA_PRECIO_MIN          = 20;
+    final private int ALTURA_PIEZAS_TOPE         = 2;
+    final private String PLUS_PIEZAS_TEXTO       = Galeria.TEXTO_CYAN + "Importe adicional - Pieza " + Galeria.TEXTO_AMARILLO;
+    final private String PLUS_PIEZAS_TEXTO_DOS   = Galeria.TEXTO_CYAN + " (EUR): "+Galeria.TEXTO_POR_DEFECTO + "10\n";
     
     //!ATRIBUTES
     protected int id;
