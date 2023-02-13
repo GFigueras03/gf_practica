@@ -2,7 +2,9 @@ package com.daw.gfigueras;
 import java.util.Scanner;
 
 public class Galeria {
-    // !CONSTANTES
+    //CONSTANTES
+        //*COLORES ANSI & CONSOLEOPTIONS
+        //?PROTECTED
     final static protected String TEXTO_BLANCO          = "\u001B[37m";
     final static protected String TEXTO_VERDE           = "\u001B[32m";     
     final static protected String TEXTO_ROJO            = "\u001B[31m";
@@ -12,12 +14,16 @@ public class Galeria {
     final static protected String FILTER_INVISIBLE	    = "\u001B[8m";
     final static protected String TEXTO_POR_DEFECTO	    = "\u001B[0m";
     final static protected String CLEAR_CONSOLE         = "\033[H\033[2J";
-    final static private String GFIGUERAS               = "  ___ ___ ___ ___ _   _ ___ ___    _   ___ "+
-                                                          "\n / __| __|_ _/ __| | | | __| _ \\  /_\\ / __|"+
-                                                          "\n| (_ | _| | | (_ | |_| | _||   / / _ \\\\__ \\"+
-                                                          "\n \\___|_| |___\\___|\\___/|___|_|_\\/_/ \\_\\___/\n";
- 
+
+    final static protected String CHECK_ESCULTURA       = "ESCULTURA";
+    final static protected String CHECK_PINTURA         = "PINTURA";
     
+        //!PRIVATE
+    final static private String GFIGUERAS               = "  ___ ___ ___ ___ _   _ ___ ___    _   ___ "+
+                                                        "\n / __| __|_ _/ __| | | | __| _ \\  /_\\ / __|"+
+                                                        "\n| (_ | _| | | (_ | |_| | _||   / / _ \\\\__ \\"+
+                                                        "\n \\___|_| |___\\___|\\___/|___|_|_\\/_/ \\_\\___/\n";
+
     final static private String FORMATO_VISUALIZAR      = TEXTO_CYAN+"Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"ID:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Autor:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Descripcion:"+TEXTO_BLANCO+" %s\n"+TEXTO_CYAN+"Tipo:"+TEXTO_BLANCO+" %s";
     final static private String FORMATO_ETIQUETA        = TEXTO_CYAN + "Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de Piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Comision Galeria(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Importe por peso(EUR):"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Importe por altura(m):"+TEXTO_BLANCO+" %d \n%s"+TEXTO_CYAN+"Precio venta(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Descuento(%.0f%% %s (EUR)):"+TEXTO_BLANCO+" %f \n"+TEXTO_CYAN+"Precio final de venta(USD):"+TEXTO_BLANCO+" %.2f";
     final static private String TEXTO_NOMBRE            = "Introduce el nombre de la obra: ";
@@ -50,116 +56,110 @@ public class Galeria {
     final static private String OPCION0_MENU            = "¿Qué obra quieres visualizar?, Introduce su ID : ";
     final static private String OPCION4_MENU            = "¿De qué obra quieres saber precio?, Introduce su ID : ";
     final static private String OPCION5_MENU            = "¿Qué obra quieres imprimir?, Introduce su ID : ";
-    final static private String ERROR_ID_OBRA_ESCO      = TEXTO_ROJO+ "El id de la obra escogida es incorrecto"+ TEXTO_BLANCO;
     final static private String VOLVER_MENU             = TEXTO_VERDE + "Pulsa 'ENTER' para volver al menu..."+  TEXTO_BLANCO + FILTER_INVISIBLE;
     final static private String SALIR                   = "\nGRACIAS POR UTILIZAR NUESTRA APLICACION!!";
     final static private String ERROR_MENU              = TEXTO_ROJO+"\nLA OPCION ESCOGIDA ES INCORRECTA, PRUEBA A ESCOGER DEL (0-6)";
     final static private String TEX_MOSTRAR_TODAS_OBRAS = "\n=====> Mostrando Obras <======\n";
-
-    final static private String CHECK_ESCULTURA         = "ESCULTURA";
-    final static private String CHECK_PINTURA           = "PINTURA";
+    final static private String MOSTRAR_OBRA_STRING     = "\n=====> MOSTRANDO OBRA <====== \n\n";
+    final static private String ETIQUETA_STRING         = "\n===>ETIQUETA<===\n\n";
+    final static private String PRECIO_VENTA_STRING     = "\n===>PRECIO DE VENTA<===\n\n";
+    
 
     final static private int COMISION_GALERIA_PERCENT   = 25;
-  
-    final static private double CONVERSOR_DOLARES       = 0.99;
 
-    //ATRIBUTES
-    public static ArrayObras obrasGuardadas           = new ArrayObras();
-    public static Escultura[] esculturasGuardadas       = new Escultura[1];
-    public static Pintura[] PinturasGuardadas           = new Pintura[1];
-    public static String[][] obrasMatrix                = new String[6][5];
-    public static boolean menu                          = true;
+    //*CASOS SWITCH MODIFICAR OBRAS
+
+    final static private int CASE_MOD_NOMBRE            = 0;
+    final static private int CASE_MOD_ID                = 1;
+    final static private int CASE_MOD_AUTOR             = 2;
+    final static private int CASE_MOD_PRECIO            = 3;
+    final static private int CASE_MOD_ALTURA            = 4;
+    final static private int CASE_MOD_PESO              = 5;
+    final static private int CASE_MOD_NPIEZAS           = 6;
+    final static private int CASE_MOD_TIPO              = 7;
+    final static private int CASE_MOD_TEC_MAT           = 8;
+    final static private int CASE_MOD_DESCRIPCION       = 9;
+    final static private int CASE_MOD_CERRAR_MENU       = 10;
+
+    //*CASOS SWITCH MENU
+
+    final static private int CASE_MENU_TODAS_OBRAS      = 0;
+    final static private int CASE_MENU_DAR_ALTA_OBRA    = 1;
+    final static private int CASE_MENU_MOD_DATOS        = 2;
+    final static private int CASE_MENU_VIS_DATOS        = 3;
+    final static private int CASE_MENU_OBT_PRECIO       = 4;
+    final static private int CASE_MENU_IMPR_ETIQUETA    = 5;
+    final static private int CASE_MENU_SALIR            = 6;
+    
+    final static private double CONVERSOR_DOLARES      = 0.99;
+
+    //ATRIBUTOS
+    private static ArrayObras obrasGuardadas            = new ArrayObras();
+    private static boolean menu                         = true;
 
 
     public static void main(String[] args) {
-        Pintura obra1 = new Pintura(001, 1000.0, 5.0, 2.0, 5, "Pintura", "Guernica","P.Picasso", "Cuadro Guerra civil", "Oleo"); 
-        Pintura obra2 = new Pintura(002, 200.0, 1.0, 1.0, 1, "Pintura",  "La Vie","P.Picasso", "Pintura de Oleo", "Oleo"); 
-        Pintura obra3 = new Pintura(003, 300.0, 1.4, 1.0, 1, "Pintura",  "El Sueño","P.Picasso", "Pintura de Acuarela", "Acuarela"); 
-        Pintura obra4 = new Pintura(004, 400.0, 1.0, 1.0, 1, "Pintura",  "Retrato de Dora Maar","P.Picasso", "Pintura de Carboncillo", "Carboncillo"); 
-        Escultura obra5 = new Escultura(005, 350.0, 1.0, 0.8, 1, "Escultura",  "El Piel roja","U.Checa", "Escultura de Acero", "Acero"); 
+        Pintura obra1       = new Pintura(001, 1000.0, 5.0, 2.0, 5, "Pintura", "Guernica","P.Picasso", "Cuadro Guerra civil", "Oleo"); 
+        Pintura obra2       = new Pintura(002, 200.0, 1.0, 1.0, 1, "Pintura",  "La Vie","P.Picasso", "Pintura de Oleo", "Oleo"); 
+        Pintura obra3       = new Pintura(003, 300.0, 1.4, 1.0, 1, "Pintura",  "El Sueño","P.Picasso", "Pintura de Acuarela", "Acuarela"); 
+        Pintura obra4       = new Pintura(004, 400.0, 1.0, 1.0, 1, "Pintura",  "Retrato de Dora Maar","P.Picasso", "Pintura de Carboncillo", "Carboncillo"); 
+        Escultura obra5     = new Escultura(005, 350.0, 1.0, 0.8, 1, "Escultura",  "El Piel roja","U.Checa", "Escultura de Acero", "Acero"); 
 
         obrasGuardadas.push(obra1);
         obrasGuardadas.push(obra2);
         obrasGuardadas.push(obra3);
         obrasGuardadas.push(obra4);
         obrasGuardadas.push(obra5);
+
         ejecutarMenu();
         
             
     }// *MAIN
 
     // ?METODOS
-    // RETORNAR DESCUENTO
 
-    // MOSTRAR OBRAS
-    public static String mostrarObra(ObraDeArte obra) { // MUESTRA OBRA POR FORMATO CORTO
-        return TEXTO_VERDE + "\n=====> MOSTRANDO OBRA <====== \n\n" + TEXTO_BLANCO + String.format(FORMATO_VISUALIZAR,
-                obra.getNombre(), obra.getId(), obra.getAutor(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
-                obra.getnPiezas(), obra.getDescripcion(), obra.getTipo() );
-    }
+    //MENU
+    public static void ejecutarMenu() {
+        while (menu == true) {
+            int option = imprimirInteger(BIENVENIDO_GALERIA);
+            switch (option) {
+                case CASE_MENU_TODAS_OBRAS:
+                    menuMostrarTodasLasObras();
+                    volverAlMenu();
+                    break;
 
-    public static String obtenerTicket(ObraDeArte obra) {
-        return TEXTO_VERDE + "\n===>ETIQUETA<===\n\n" + TEXTO_BLANCO + "Nombre: " + obra.getNombre() + "\nAutor: " + obra.getAutor()
-                + "\nDescripcion: " +
-                obra.getDescripcion() + "\n";
-    }
+                case CASE_MENU_DAR_ALTA_OBRA:
+                    obrasGuardadas.push(darAltaObra());
+                    volverAlMenu();
+                    break;
 
-    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, double descuento) { // MUESTRA OBRA POR FORMATO
-                                                                                      // ETIQUETA
-        return  TEXTO_VERDE + "\n===>PRECIO DE VENTA<===\n\n" + TEXTO_BLANCO + String.format(FORMATO_ETIQUETA, obra.getNombre(),
-                obra.getAltura(), obra.getPeso(), obra.getnPiezas(), obra.getPrecio(),
-                (obra.getPrecio() * COMISION_GALERIA_PERCENT) / 100, obra.calcularPrecioPeso(),
-                obra.calcularPrecioAltura(),
-                obra.imprimirImporteAdiccional(), obtenerPrecioVenta(obra), descuento, obra.getTipo(),
-                obra.calcularDescuento(obtenerPrecioVenta(obra)),
-                calcularPrecioFinalVenta(obra));
-    }
+                case CASE_MENU_MOD_DATOS:
+                    modificarDatos();
+                    break;
 
-    public static double obtenerPrecioVenta(ObraDeArte obra) { // OBTENER PRECIO DE VENTA SIN PORCENTAJES FINALES
-        double comisionGaleriaEuros = ((obra.getPrecio() * COMISION_GALERIA_PERCENT) / 100);
-        int importePeso             = obra.calcularPrecioPeso();
-        int importeAltura           = obra.calcularPrecioAltura();
-        int importePlusPiezas       = obra.calcularPlusPiezas();
+                case CASE_MENU_VIS_DATOS:
+                    menuVisualizarDatos();
+                    break;
 
-        double precio = obra.getPrecio();
-        precio += comisionGaleriaEuros;
-        precio += importeAltura;
-        precio += importePeso;
-        precio += importePlusPiezas;
-        return precio;
-    }
+                case CASE_MENU_OBT_PRECIO:
+                   menuObtenerPrecio();
+                   break;
 
-    
+                case CASE_MENU_IMPR_ETIQUETA:
+                    menuMostrarEtiqueta();
+                    break;
 
-    // CALCULOS
-    public static double calcularPrecioFinalVenta(ObraDeArte obra) {
-        double precio = obtenerPrecioVenta(obra) - obra.calcularDescuento(obtenerPrecioVenta(obra));
-        return precio * CONVERSOR_DOLARES;
-    }
+                case CASE_MENU_SALIR:
+                    System.out.println(TEXTO_AMARILLO + SALIR + TEXTO_BLANCO);
+                    menu = false;
+                    break;
 
-    // METODOS SCANNER OBRA
-    public static String imprimirString(String texto) {
-        Scanner textSc = new Scanner(System.in);
-        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
-        String resultado = textSc.nextLine();
-
-        return resultado;
-    }
-
-    public static int imprimirInteger(String texto) {
-        Scanner numberSc = new Scanner(System.in);
-        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
-        int resultado = numberSc.nextInt();
-
-        return resultado;
-    }
-
-    public static double imprimirDouble(String texto) {
-        Scanner doubleSc = new Scanner(System.in);
-        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
-        double resultado = doubleSc.nextDouble();
-
-        return resultado;
+                default:
+                    System.out.println(ERROR_MENU);
+                    volverAlMenu();
+                    break;
+            }
+        }
     }
 
     // DAR DE ALTA UNA OBRA
@@ -199,8 +199,76 @@ public class Galeria {
                     break;
             }
         }while(!tipoEsCorrecto);
+        
         return obra;
     }
+   
+    //METODOS DEL MENU
+
+    public static void volverAlMenu(){
+        imprimirString("\n" + VOLVER_MENU);
+        System.out.println(TEXTO_POR_DEFECTO);
+        ejecutarMenu();
+    }
+
+    public static void menuMostrarTodasLasObras() { // MOSTRAR OBRAS PARA EL MENU
+        System.out.println(TEXTO_VERDE + TEX_MOSTRAR_TODAS_OBRAS);
+        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
+            System.out.println(TEXTO_BLANCO + obrasGuardadas.getObra(i).getNombre());
+        }
+    }
+
+    public static void menuVisualizarDatos(){
+        int obraEscogida = imprimirInteger(CLEAR_CONSOLE + OPCION0_MENU);
+        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
+            if (obrasGuardadas.getObra(i).getId() == obraEscogida) {
+                System.out.println(mostrarObra(obrasGuardadas.getObra(i)));
+                volverAlMenu();
+            } 
+        }
+    }
+    public static void menuObtenerPrecio(){
+        int obraEscogidaDos = imprimirInteger(CLEAR_CONSOLE + OPCION4_MENU);
+        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
+            if (obrasGuardadas.getObra(i).getId() == obraEscogidaDos) {
+                System.out.println(obtenerPrecioVentaEtiqueta(obrasGuardadas.getObra(i), obrasGuardadas.getObra(i).getDescuento()));
+               volverAlMenu();
+            }
+        }
+    }
+    
+    public static void menuMostrarEtiqueta(){
+        int obraEscogidaTres = imprimirInteger(CLEAR_CONSOLE + OPCION5_MENU);
+        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
+            if (obrasGuardadas.getObra(i).getId() == obraEscogidaTres) {
+                System.out.println(obtenerTicket(obrasGuardadas.getObra(i)));
+                volverAlMenu();
+            }
+        }
+    }
+
+    //METODO OBTENER PRECIO VENTA
+
+    public static double obtenerPrecioVenta(ObraDeArte obra) { // OBTENER PRECIO DE VENTA SIN PORCENTAJES FINALES
+        double comisionGaleriaEuros = ((obra.getPrecio() * COMISION_GALERIA_PERCENT) / 100);
+        int importePeso             = obra.calcularPrecioPeso();
+        int importeAltura           = obra.calcularPrecioAltura();
+        int importePlusPiezas       = obra.calcularPlusPiezas();
+
+        double precio = obra.getPrecio();
+        precio += comisionGaleriaEuros;
+        precio += importeAltura;
+        precio += importePeso;
+        precio += importePlusPiezas;
+        return precio;
+    }
+
+    public static double calcularPrecioFinalVenta(ObraDeArte obra) {
+        double precio = obtenerPrecioVenta(obra) - obra.calcularDescuento(obtenerPrecioVenta(obra));
+        return precio * CONVERSOR_DOLARES;
+    }
+
+    //METODO MODIFICAR DATOS
 
     public static void modificarDatos() {
         boolean menu = true;
@@ -213,42 +281,42 @@ public class Galeria {
             int idCampoelegido = imprimirInteger(MENU_MODIFICAR);
             while (menu == true) {
                 switch (idCampoelegido) {
-                    case 0:
+                    case CASE_MOD_NOMBRE:
                         obrasGuardadas.getObra(idPedido).setNombre(imprimirString(CAMBIAR_NOMBRE));
                         menu = false;
                         break;
 
-                    case 1:
+                    case CASE_MOD_ID:
                         obrasGuardadas.getObra(idPedido).setId(imprimirInteger(CAMBIAR_ID));
                         menu = false;
                         break;
 
-                    case 2:
+                    case CASE_MOD_AUTOR:
                         obrasGuardadas.getObra(idPedido).setAutor(imprimirString(CAMBIAR_AUTOR));
                         menu = false;
                         break;
 
-                    case 3:
+                    case CASE_MOD_PRECIO:
                         obrasGuardadas.getObra(idPedido).setPrecio(imprimirDouble(CAMBIAR_PRECIO));
                         menu = false;
                         break;
 
-                    case 4:
+                    case CASE_MOD_ALTURA:
                         obrasGuardadas.getObra(idPedido).setAltura(imprimirDouble(CAMBIAR_ALTURA));
                         menu = false;
                         break;
 
-                    case 5:
+                    case CASE_MOD_PESO:
                         obrasGuardadas.getObra(idPedido).setPeso(imprimirDouble(CAMBIAR_PESO));
                         menu = false;
                         break;
 
-                    case 6:
+                    case CASE_MOD_NPIEZAS:
                         obrasGuardadas.getObra(idPedido).setnPiezas(imprimirInteger(CAMBIAR_NºPIEZAS));
                         menu = false;
                         break;
 
-                    case 7:
+                    case CASE_MOD_TIPO:
                         if (obrasGuardadas.getObra(idPedido).getTipo().toUpperCase().equals(CHECK_ESCULTURA) || 
                             obrasGuardadas.getObra(idPedido).getTipo().toUpperCase().equals(CHECK_PINTURA)) {
                                 
@@ -276,7 +344,7 @@ public class Galeria {
 
                             }
                         }
-                    case 8:
+                    case CASE_MOD_TEC_MAT:
                         if (obrasGuardadas.getObra(idPedido).getTipo().toUpperCase().equals(CHECK_ESCULTURA)) {
                             Escultura escTemp = (Escultura)obrasGuardadas.getObra(idPedido);
                             String material = imprimirString(TEXTO_MATERIAL);
@@ -290,12 +358,13 @@ public class Galeria {
                             menu = false;
                         }
                         break;
-                    case 9:
+                    case CASE_MOD_DESCRIPCION:
                         imprimirString(CAMBIAR_DESCRIPCION);
                         obrasGuardadas.getObra(idPedido).setDescripcion(imprimirString(CAMBIAR_DESCRIPCION));
                         menu = false;
                         break;
-                    case 10:
+
+                    case CASE_MOD_CERRAR_MENU:
                         menu = false;
                         break;
                 }
@@ -304,75 +373,53 @@ public class Galeria {
         }
     }
 
-    // CHECKEAR TIPO
-
-    public static void volverAlMenu(){
-        String limpiar = imprimirString("\n" + VOLVER_MENU);
-        System.out.println(TEXTO_POR_DEFECTO);
-        ejecutarMenu();
-
-    }
-    // MENU
-    public static void ejecutarMenu() {
-        while (menu == true) {
-            int option = imprimirInteger(BIENVENIDO_GALERIA);
-            switch (option) {
-                case 0:
-                    mostrarTodasLasObras();
-                    volverAlMenu();
-                    break;
-                case 1:
-                    obrasGuardadas.push(darAltaObra());
-                    volverAlMenu();
-                    break;
-                case 2:
-                    modificarDatos();
-                    break;
-
-                case 3:
-                    int obraEscogida = imprimirInteger(CLEAR_CONSOLE + OPCION0_MENU);
-                    for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-                        if (obrasGuardadas.getObra(i).getId() == obraEscogida) {
-                            System.out.println(mostrarObra(obrasGuardadas.getObra(i)));
-                            volverAlMenu();
-                        } 
-                    }
-                    break;
-                case 4:
-                    int obraEscogidaDos = imprimirInteger(CLEAR_CONSOLE + OPCION4_MENU);
-                    for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-                        if (obrasGuardadas.getObra(i).getId() == obraEscogidaDos) {
-                            System.out.println(
-                                    obtenerPrecioVentaEtiqueta(obrasGuardadas.getObra(i), obrasGuardadas.getObra(i).getDescuento()));
-                           volverAlMenu();
-                        }
-                    }
-                    break;
-                case 5:
-                    int obraEscogidaTres = imprimirInteger(CLEAR_CONSOLE + OPCION5_MENU);
-                    for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-                        if (obrasGuardadas.getObra(i).getId() == obraEscogidaTres) {
-                            System.out.println(obtenerTicket(obrasGuardadas.getObra(i)));
-                            volverAlMenu();
-                        }
-                    }
-                    break;
-                case 6:
-                    System.out.println(TEXTO_AMARILLO + SALIR + TEXTO_BLANCO);
-                    menu = false;
-                    break;
-                default:
-                    System.out.println(ERROR_MENU);
-                    volverAlMenu();
-                    break;
-            }
-        }
+    //METODOS MOSTRAR OBRAS Y STRINGS 
+    public static String mostrarObra(ObraDeArte obra) { // MUESTRA OBRA POR FORMATO CORTO
+        return TEXTO_VERDE + MOSTRAR_OBRA_STRING + TEXTO_BLANCO + String.format(FORMATO_VISUALIZAR,
+                obra.getNombre(), obra.getId(), obra.getAutor(), obra.getPrecio(), obra.getAltura(), obra.getPeso(),
+                obra.getnPiezas(), obra.getDescripcion(), obra.getTipo() );
     }
 
-    public static void mostrarTodasLasObras() { // MOSTRAR OBRAS PARA EL MENU
-        System.out.println(TEXTO_VERDE + TEX_MOSTRAR_TODAS_OBRAS);
-        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-            System.out.println(TEXTO_BLANCO + obrasGuardadas.getObra(i).getNombre());
-        }
+    public static String obtenerTicket(ObraDeArte obra) {
+        return TEXTO_VERDE + ETIQUETA_STRING + TEXTO_BLANCO + "Nombre: " + obra.getNombre() + "\nAutor: " + obra.getAutor()
+                + "\nDescripcion: " +
+                obra.getDescripcion() + "\n";
+    }
+
+    public static String obtenerPrecioVentaEtiqueta(ObraDeArte obra, double descuento) { // MUESTRA OBRA POR FORMATO
+        return  TEXTO_VERDE + PRECIO_VENTA_STRING + TEXTO_BLANCO + String.format(FORMATO_ETIQUETA, obra.getNombre(),
+            obra.getAltura(), obra.getPeso(), obra.getnPiezas(), obra.getPrecio(),
+            (obra.getPrecio() * COMISION_GALERIA_PERCENT) / 100, obra.calcularPrecioPeso(),
+            obra.calcularPrecioAltura(),
+            obra.imprimirImporteAdiccional(), obtenerPrecioVenta(obra), descuento, obra.getTipo(),
+            obra.calcularDescuento(obtenerPrecioVenta(obra)),
+            calcularPrecioFinalVenta(obra));
+    }
+
+    //METODOS SCANNER CON TEXTO PERSONALIZADO
+
+     public static String imprimirString(String texto) {
+        Scanner textSc = new Scanner(System.in);
+        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
+        String resultado = textSc.nextLine();
+
+        return resultado;
+    }
+
+    public static int imprimirInteger(String texto) {
+        Scanner numberSc = new Scanner(System.in);
+        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
+        int resultado = numberSc.nextInt();
+
+        return resultado;
+    }
+
+    public static double imprimirDouble(String texto) {
+        Scanner doubleSc = new Scanner(System.in);
+        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
+        double resultado = doubleSc.nextDouble();
+
+        return resultado;
     }
 }
+
