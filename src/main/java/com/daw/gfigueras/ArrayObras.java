@@ -1,13 +1,13 @@
 package com.daw.gfigueras;
 
-public class AlmacenObras {
+public class ArrayObras {
     private ObraDeArte[] obrasGuardadas;
     private final int TAM_INICIAL   = 5;
     
     private int tamAlmacen          = TAM_INICIAL;
     private int ultimaObraGuardada  = 0;
 
-    public AlmacenObras(){
+    public ArrayObras(){
         obrasGuardadas = new ObraDeArte[TAM_INICIAL];
     }
 
