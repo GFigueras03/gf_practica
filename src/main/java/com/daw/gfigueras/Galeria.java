@@ -60,7 +60,6 @@ public class Galeria {
     final static private String OPCION5_MENU            = "¿Qué obra quieres imprimir?, Introduce su ID : ";
     final static private String VOLVER_MENU             = TEXTO_VERDE + "Pulsa 'ENTER' para volver al menu..."+  TEXTO_BLANCO + FILTER_INVISIBLE;
     final static private String SALIR                   = "\nGRACIAS POR UTILIZAR NUESTRA APLICACION!!";
-    final static private String ERROR_TIPOS             = TEXTO_ROJO + "El tipo que esta intentando introducir no es correcto\nComprueba que no introduce letras en vez de numeros" + TEXTO_BLANCO;
     final static private String ERROR_MENU              = TEXTO_ROJO+"\nLA OPCION ESCOGIDA ES INCORRECTA, PRUEBA A ESCOGER DEL (0-6)";
     final static private String TEX_MOSTRAR_TODAS_OBRAS = "\n=====> Mostrando Obras <======\n";
     final static private String MOSTRAR_OBRA_STRING     = "\n=====> MOSTRANDO OBRA <====== \n\n";
@@ -131,6 +130,7 @@ public class Galeria {
 
     //MENU
     public static void ejecutarMenu() {
+      try{
         while (menu == true) {
             int option = imprimirInteger(BIENVENIDO_GALERIA);
             switch (option) {
@@ -171,9 +171,14 @@ public class Galeria {
                     break;
             }
         }
+      }catch(InputMismatchException imme){
+        System.out.println(ERROR_MENU);
+        volverAlMenu();
+      }
     }
     // DAR DE ALTA UNA OBRA
     public static ObraDeArte darAltaObra() {
+        ObraDeArte obra         = null;
         boolean tipoEsCorrecto  = false;
         int id                  = calcularId();
         int piezas              = imprimirInteger(TEXTO_NºPIEZAS);
@@ -186,7 +191,6 @@ public class Galeria {
         String descripcion      = imprimirString(TEXTO_DESCRIPCION);
 
 
-        ObraDeArte obra = null;
 
 
         do{
@@ -212,8 +216,7 @@ public class Galeria {
                     tipo = imprimirString(TEXTO_TIPO_INCORRECTO);
                     break;
             }
-        }while(!tipoEsCorrecto);
-        
+        }while(!tipoEsCorrecto);  
         return obra;
     }
    
@@ -250,32 +253,41 @@ public class Galeria {
     }
 
     public static void menuVisualizarDatos(){
-        int obraEscogida = imprimirInteger(CLEAR_CONSOLE + OPCION0_MENU);
-        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-            if (obrasGuardadas.getObra(i).getId() == obraEscogida) {
-                System.out.println(mostrarObra(obrasGuardadas.getObra(i)));
-                volverAlMenu();
-            } 
+        try{
+            int obraEscogida = imprimirInteger(CLEAR_CONSOLE + OPCION0_MENU);
+                if (obrasGuardadas.getObra(obraEscogida).getId() == obraEscogida) {
+                    System.out.println(mostrarObra(obrasGuardadas.getObra(obraEscogida)));
+                    volverAlMenu();
+                } 
+         }catch(IndexOutOfBoundsException ioobe){
+            System.out.println(ERROR_ID_SOLCITADO);
+            volverAlMenu();
         }
     }
     public static void menuObtenerPrecio(){
-        int obraEscogidaDos = imprimirInteger(CLEAR_CONSOLE + OPCION4_MENU);
-        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-            if (obrasGuardadas.getObra(i).getId() == obraEscogidaDos) {
-                System.out.println(obtenerPrecioVentaEtiqueta(obrasGuardadas.getObra(i), obrasGuardadas.getObra(i).getDescuento()));
-               volverAlMenu();
+        try{
+            int obraEscogidaDos = imprimirInteger(CLEAR_CONSOLE + OPCION4_MENU);
+                if(obrasGuardadas.getObra(obraEscogidaDos).getId() == obraEscogidaDos){
+                    System.out.println(obtenerPrecioVentaEtiqueta(obrasGuardadas.getObra(obraEscogidaDos), obrasGuardadas.getObra(obraEscogidaDos).getDescuento()));
+                    volverAlMenu();
+                }
+            }catch(IndexOutOfBoundsException ioobe){
+                System.out.println(ERROR_ID_SOLCITADO);
+                volverAlMenu();
             }
-        }
     }
     
     public static void menuMostrarEtiqueta(){
-        int obraEscogidaTres = imprimirInteger(CLEAR_CONSOLE + OPCION5_MENU);
-        for (int i = 0; i < obrasGuardadas.getTam(); i++) {
-            if (obrasGuardadas.getObra(i).getId() == obraEscogidaTres) {
-                System.out.println(obtenerTicket(obrasGuardadas.getObra(i)));
-                volverAlMenu();
-            }
-        }
+        try{
+            int obraEscogidaTres = imprimirInteger(CLEAR_CONSOLE + OPCION5_MENU);
+            if(obrasGuardadas.getObra(obraEscogidaTres).getId() == obraEscogidaTres){
+                System.out.println(obtenerTicket(obrasGuardadas.getObra(obraEscogidaTres)));
+                    volverAlMenu();
+                }
+        }catch(IndexOutOfBoundsException ioobe){
+            System.out.println(ERROR_ID_SOLCITADO);
+            volverAlMenu();
+        } 
     }
 
     //METODO OBTENER PRECIO VENTA
@@ -432,48 +444,32 @@ public class Galeria {
     //METODOS SCANNER CON TEXTO PERSONALIZADO
 
      public static String imprimirString(String texto) {
-        String resultado = "";
-        try{
-            Scanner textSc = new Scanner(System.in);
-            System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
-            resultado = textSc.nextLine();
-            return resultado;
-
-        }
-        catch(InputMismatchException imme){
-            System.out.println(ERROR_TIPOS);
-            volverAlMenu();
-            return resultado;
-        }
+        Scanner textSc = new Scanner(System.in);
+        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
+        String resultado = textSc.nextLine();
+        return resultado;
        
     }
 
     public static int imprimirInteger(String texto) {
-        int resultado = 0;
-        try{
+        int resultado = -1;
         Scanner numberSc = new Scanner(System.in);
-        System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
-        resultado = numberSc.nextInt();
-        return resultado;
-        }catch(InputMismatchException imme){
-            System.out.println(ERROR_TIPOS);
-            volverAlMenu();
+        try{
+            System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
+            resultado = numberSc.nextInt();
             return resultado;
+
+        }catch(InputMismatchException imme){
+            return -1;
         }
+     
     }
 
     public static double imprimirDouble(String texto) {
-        double resultado = 0.0;
-        try{
-         Scanner doubleSc = new Scanner(System.in);
+        Scanner doubleSc = new Scanner(System.in);
         System.out.print(TEXTO_BLANCO + texto + TEXTO_MORADO);
-        resultado = doubleSc.nextDouble();
+        double resultado = doubleSc.nextDouble();
         return resultado;
-        }catch(InputMismatchException imme){
-            System.out.println(ERROR_TIPOS);
-            volverAlMenu();
-            return resultado;
-        }
 
     }
 }
