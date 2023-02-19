@@ -25,57 +25,57 @@ public class Galeria {
                                                         "\n| (_ | _| | | (_ | |_| | _||   / / _ \\\\__ \\"+
                                                         "\n \\___|_| |___\\___|\\___/|___|_|_\\/_/ \\_\\___/\n";
 
-    final static private String FORMATO_VISUALIZAR      = TEXTO_CYAN+"Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"ID:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Autor:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Descripcion:"+TEXTO_BLANCO+" %s\n"+TEXTO_CYAN+"Tipo:"+TEXTO_BLANCO+" %s";
-    final static private String FORMATO_ETIQUETA        = TEXTO_CYAN + "Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de Piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Comision Galeria(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Importe por peso(EUR):"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Importe por altura(m):"+TEXTO_BLANCO+" %d \n%s"+TEXTO_CYAN+"Precio venta(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Descuento(%.0f%% %s (EUR)):"+TEXTO_BLANCO+" %f \n"+TEXTO_CYAN+"Precio final de venta(USD):"+TEXTO_BLANCO+" %.2f";
-    final static private String TEXTO_NOMBRE            = "Introduce el nombre de la obra: ";
-    final static private String TEXTO_PRECIO            = "Introduce el precio de la obra(€): ";
-    final static private String TEXTO_ALTURA            = "Introduce la altura de la obra(m): ";
-    final static private String TEXTO_PESO              = "Introduce el peso de la obra(t): ";
-    final static private String TEXTO_NºPIEZAS          = "Introduce el numero de piezas de la obra: ";
-    final static private String TEXTO_TIPO              = "Introduce el tipo(" + TEXTO_ROJO + "Escultura" + TEXTO_BLANCO + " o " + TEXTO_ROJO+ "Pintura" + TEXTO_BLANCO + "): ";
-    final static private String TEXTO_AUTOR             = "Introduce el nombre del autor: ";
-    final static private String TEXTO_DESCRIPCION       = "Introduce la descripcion de la obra: ";
-    final static private String TEXTO_ERROR             = "El tipo de obra es incorrecta, intentalo de nuevo. ";
-    final static private String TEXTO_TIPO_INCORRECTO   = "Vuelve a introducir el tipo (" + TEXTO_ROJO + "Escultura" + TEXTO_BLANCO + " o "+ TEXTO_ROJO + "Pintura" + TEXTO_BLANCO + "): ";
-    final static private String TEXTO_MATERIAL          = "Introduce el Material de la escultura:(" + TEXTO_ROJO + "Hierro" + TEXTO_BLANCO+ " , " + TEXTO_ROJO + "Acero" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Cobre" + TEXTO_BLANCO + "): ";
-    final static private String TEXTO_TECNICA           = "Introduce la Tecnica de la pintura:(" + TEXTO_ROJO + "Óleo" + TEXTO_BLANCO + " , "+ TEXTO_ROJO + "Acuarela" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Carboncillo" + TEXTO_BLANCO + "): ";
-    final static private String TEXTO_TECNICA_ERR       = "Tecnica Incorrecta introduce:(" + TEXTO_ROJO + "Oleo" + TEXTO_BLANCO + " , "+ TEXTO_ROJO + "Acuarela" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Carboncillo" + TEXTO_BLANCO + "): ";
-    final static private String TEXTO_MATERIAL_ERR      = "Material Incorrecta introduce:(" + TEXTO_ROJO + "Hierro" + TEXTO_BLANCO + " , "+ TEXTO_ROJO + "Cobre" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Acero" + TEXTO_BLANCO + "): ";
-    final static private String BIENVENIDO_GALERIA      = CLEAR_CONSOLE +TEXTO_CYAN + GFIGUERAS +TEXTO_BLANCO+ "\n"+TEXTO_BLANCO+ "Bienvenido al menu de la galeria"+ TEXTO_CYAN+ " JWD"+ TEXTO_BLANCO +", ¿Que desea?:"+ TEXTO_BLANCO + "\n\n- "+ TEXTO_CYAN + "[0]" + TEXTO_BLANCO +" - Visualizar todas las obras de arte: \n- "+TEXTO_CYAN+"[1]"+TEXTO_BLANCO +" - Dar de alta una obra: \n- "+TEXTO_CYAN+"[2]"+TEXTO_BLANCO +" - Modificar los datos de una obra \n- "+TEXTO_CYAN +"[3]"+TEXTO_BLANCO +" - Visualizar los datos de una obra: \n- "+TEXTO_CYAN +"[4]"+ TEXTO_BLANCO+" - Obtener el Precio de venta de una obra: \n- "+TEXTO_CYAN +"[5]"+TEXTO_BLANCO +" - Imprimir etiqueta de una obra: \n- "+TEXTO_CYAN+"[6]"+TEXTO_BLANCO+" - Salir: \n\n";
-    final static private String ESCULTURA_TRUE          = TEXTO_VERDE + "La escultura ha sido dada de alta correctamente: " + TEXTO_BLANCO;
-    final static private String PINTURA_TRUE            = TEXTO_VERDE + "La pintura ha sido dada de alta correctamente: " + TEXTO_BLANCO;
-    final static private String MODIFICAR_OBRA_ID       = "Introduce el ID de la obra que quieres modificar: ";
-    final static private String ERROR_ID_SOLCITADO      = TEXTO_ROJO+"El ID solicitado no existe o esta fuera de rango " + TEXTO_BLANCO;
-    final static private String MENU_MODIFICAR          = TEXTO_MORADO+ "¿Qué campo deseas modificar?\n\n" + TEXTO_BLANCO + "- "+TEXTO_CYAN + "[0]"+TEXTO_BLANCO +"  - Nombre:\n- " + TEXTO_CYAN + "[1]"+ TEXTO_BLANCO+ "  - ID:\n-"+ TEXTO_CYAN + " [2]"+ TEXTO_BLANCO+"  - Autor:\n- "+ TEXTO_CYAN + "[3]"+ TEXTO_BLANCO +"  - Precio:\n- "+ TEXTO_CYAN +"[4]"+TEXTO_BLANCO +"  - Altura:\n- " + TEXTO_CYAN + "[5]"+TEXTO_BLANCO +"  - Peso:\n- " + TEXTO_CYAN + "[6]"+ TEXTO_BLANCO+ "  - NºPiezas:\n- "+ TEXTO_CYAN + "[7]"+ TEXTO_BLANCO + "  - Tipo:\n- "+ TEXTO_CYAN + "[8]"+TEXTO_BLANCO + "  - Material/Técnica:\n- "+ TEXTO_CYAN + "[9]"+ TEXTO_BLANCO + "  - Descripcio:\n- " + TEXTO_CYAN + "[10]"+ TEXTO_BLANCO + " - Salir: \n";
-    final static private String CAMBIAR_ID              = "Introduce el nuevo ID que quieres modificar: \n";
-    final static private String CAMBIAR_NOMBRE          = "Introduce el nuevo Nombre que quieres modificar :\n";
-    final static private String CAMBIAR_AUTOR           = "Introduce el nuevo Autor que quieres modificar :\n";
-    final static private String CAMBIAR_PRECIO          = "Introduce el nuevo Precio que quieres modificar :\n";
-    final static private String CAMBIAR_ALTURA          = "Introduce la nueva Altura que quieres modificar :\n";
-    final static private String CAMBIAR_PESO            = "Introduce el nuevo Peso que quieres modificar :\n";
-    final static private String CAMBIAR_NºPIEZAS        = "Introduce el nuevo NºPiezas que quieres modificar :\n";
-    final static private String CAMBIAR_DESCRIPCION     = "Introduce la nueva Descripcion que quieres modificar :\n";
-    final static private String OPCION0_MENU            = "¿Qué obra quieres visualizar?, Introduce su ID : ";
-    final static private String OPCION4_MENU            = "¿De qué obra quieres saber precio?, Introduce su ID : ";
-    final static private String OPCION5_MENU            = "¿Qué obra quieres imprimir?, Introduce su ID : ";
-    final static private String VOLVER_MENU             = TEXTO_VERDE + "Pulsa 'ENTER' para volver al menu..."+  TEXTO_BLANCO + FILTER_INVISIBLE;
-    final static private String SALIR                   = "\nGRACIAS POR UTILIZAR NUESTRA APLICACION!!";
-    final static private String ERROR_MENU              = TEXTO_ROJO+"\nLA OPCION ESCOGIDA ES INCORRECTA, PRUEBA A ESCOGER DEL (0-6)";
-    final static private String TEX_MOSTRAR_TODAS_OBRAS = "\n=====> Mostrando Obras <======\n";
-    final static private String MOSTRAR_OBRA_STRING     = "\n=====> MOSTRANDO OBRA <====== \n\n";
-    final static private String ETIQUETA_STRING         = "\n===>ETIQUETA<===\n\n";
-    final static private String PRECIO_VENTA_STRING     = "\n===>PRECIO DE VENTA<===\n\n";
-    final static private String NOMBRE_TODAS_OBRAS      = TEXTO_CYAN + "Nombre: " + TEXTO_BLANCO;
-    final static private String ID_TODAS_OBRAS          = TEXTO_AMARILLO+"\nID: " + TEXTO_BLANCO + "🔒";
-    final static private String HIERRO                  = "HIERRO";
-    final static private String COBRE                   = "COBRE";
-    final static private String ACERO                   = "ACERO";
-    final static private String CARBONCILLO             = "CARBONCILLO";
-    final static private String ACUARELA                = "ACUARELA";
-    final static private String OLEO                    = "OLEO";
+    final static protected String FORMATO_VISUALIZAR      = TEXTO_CYAN+"Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"ID:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Autor:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Descripcion:"+TEXTO_BLANCO+" %s\n"+TEXTO_CYAN+"Tipo:"+TEXTO_BLANCO+" %s";
+    final static protected String FORMATO_ETIQUETA        = TEXTO_CYAN + "Nombre:"+TEXTO_BLANCO+" %s \n"+TEXTO_CYAN+"Altura(m):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Peso(t):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Numero de Piezas:"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Precio(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Comision Galeria(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Importe por peso(EUR):"+TEXTO_BLANCO+" %d \n"+TEXTO_CYAN+"Importe por altura(m):"+TEXTO_BLANCO+" %d \n%s"+TEXTO_CYAN+"Precio venta(EUR):"+TEXTO_BLANCO+" %.2f \n"+TEXTO_CYAN+"Descuento(%.0f%% %s (EUR)):"+TEXTO_BLANCO+" %f \n"+TEXTO_CYAN+"Precio final de venta(USD):"+TEXTO_BLANCO+" %.2f";
+    final static protected String TEXTO_NOMBRE            = "Introduce el nombre de la obra: ";
+    final static protected String TEXTO_PRECIO            = "Introduce el precio de la obra(€): ";
+    final static protected String TEXTO_ALTURA            = "Introduce la altura de la obra(m): ";
+    final static protected String TEXTO_PESO              = "Introduce el peso de la obra(t): ";
+    final static protected String TEXTO_NºPIEZAS          = "Introduce el numero de piezas de la obra: ";
+    final static protected String TEXTO_TIPO              = "Introduce el tipo(" + TEXTO_ROJO + "Escultura" + TEXTO_BLANCO + " o " + TEXTO_ROJO+ "Pintura" + TEXTO_BLANCO + "): ";
+    final static protected String TEXTO_AUTOR             = "Introduce el nombre del autor: ";
+    final static protected String TEXTO_DESCRIPCION       = "Introduce la descripcion de la obra: ";
+    final static protected String TEXTO_ERROR             = "El tipo de obra es incorrecta, intentalo de nuevo. ";
+    final static protected String TEXTO_TIPO_INCORRECTO   = "Vuelve a introducir el tipo (" + TEXTO_ROJO + "Escultura" + TEXTO_BLANCO + " o "+ TEXTO_ROJO + "Pintura" + TEXTO_BLANCO + "): ";
+    final static protected String TEXTO_MATERIAL          = "Introduce el Material de la escultura:(" + TEXTO_ROJO + "Hierro" + TEXTO_BLANCO+ " , " + TEXTO_ROJO + "Acero" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Cobre" + TEXTO_BLANCO + "): ";
+    final static protected String TEXTO_TECNICA           = "Introduce la Tecnica de la pintura:(" + TEXTO_ROJO + "Óleo" + TEXTO_BLANCO + " , "+ TEXTO_ROJO + "Acuarela" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Carboncillo" + TEXTO_BLANCO + "): ";
+    final static protected String TEXTO_TECNICA_ERR       = "Tecnica Incorrecta introduce:(" + TEXTO_ROJO + "Oleo" + TEXTO_BLANCO + " , "+ TEXTO_ROJO + "Acuarela" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Carboncillo" + TEXTO_BLANCO + "): ";
+    final static protected String TEXTO_MATERIAL_ERR      = "Material Incorrecta introduce:(" + TEXTO_ROJO + "Hierro" + TEXTO_BLANCO + " , "+ TEXTO_ROJO + "Cobre" + TEXTO_BLANCO + " o " + TEXTO_ROJO + "Acero" + TEXTO_BLANCO + "): ";
+    final static protected String BIENVENIDO_GALERIA      = CLEAR_CONSOLE +TEXTO_CYAN + GFIGUERAS +TEXTO_BLANCO+ "\n"+TEXTO_BLANCO+ "Bienvenido al menu de la galeria"+ TEXTO_CYAN+ " JWD"+ TEXTO_BLANCO +", ¿Que desea?:"+ TEXTO_BLANCO + "\n\n- "+ TEXTO_CYAN + "[0]" + TEXTO_BLANCO +" - Visualizar todas las obras de arte: \n- "+TEXTO_CYAN+"[1]"+TEXTO_BLANCO +" - Dar de alta una obra: \n- "+TEXTO_CYAN+"[2]"+TEXTO_BLANCO +" - Modificar los datos de una obra \n- "+TEXTO_CYAN +"[3]"+TEXTO_BLANCO +" - Visualizar los datos de una obra: \n- "+TEXTO_CYAN +"[4]"+ TEXTO_BLANCO+" - Obtener el Precio de venta de una obra: \n- "+TEXTO_CYAN +"[5]"+TEXTO_BLANCO +" - Imprimir etiqueta de una obra: \n- "+TEXTO_CYAN+"[6]"+TEXTO_BLANCO+" - Salir: \n\n";
+    final static protected String ESCULTURA_TRUE          = TEXTO_VERDE + "La escultura ha sido dada de alta correctamente: " + TEXTO_BLANCO;
+    final static protected String PINTURA_TRUE            = TEXTO_VERDE + "La pintura ha sido dada de alta correctamente: " + TEXTO_BLANCO;
+    final static protected String MODIFICAR_OBRA_ID       = "Introduce el ID de la obra que quieres modificar: ";
+    final static protected String ERROR_ID_SOLCITADO      = TEXTO_ROJO+"El ID solicitado no existe o esta fuera de rango " + TEXTO_BLANCO;
+    final static protected String MENU_MODIFICAR          = TEXTO_MORADO+ "¿Qué campo deseas modificar?\n\n" + TEXTO_BLANCO + "- "+TEXTO_CYAN + "[0]"+TEXTO_BLANCO +"  - Nombre:\n- " + TEXTO_CYAN + "[1]"+ TEXTO_BLANCO+ "  - ID:\n-"+ TEXTO_CYAN + " [2]"+ TEXTO_BLANCO+"  - Autor:\n- "+ TEXTO_CYAN + "[3]"+ TEXTO_BLANCO +"  - Precio:\n- "+ TEXTO_CYAN +"[4]"+TEXTO_BLANCO +"  - Altura:\n- " + TEXTO_CYAN + "[5]"+TEXTO_BLANCO +"  - Peso:\n- " + TEXTO_CYAN + "[6]"+ TEXTO_BLANCO+ "  - NºPiezas:\n- "+ TEXTO_CYAN + "[7]"+ TEXTO_BLANCO + "  - Tipo:\n- "+ TEXTO_CYAN + "[8]"+TEXTO_BLANCO + "  - Material/Técnica:\n- "+ TEXTO_CYAN + "[9]"+ TEXTO_BLANCO + "  - Descripcio:\n- " + TEXTO_CYAN + "[10]"+ TEXTO_BLANCO + " - Salir: \n";
+    final static protected String CAMBIAR_ID              = "Introduce el nuevo ID que quieres modificar: \n";
+    final static protected String CAMBIAR_NOMBRE          = "Introduce el nuevo Nombre que quieres modificar :\n";
+    final static protected String CAMBIAR_AUTOR           = "Introduce el nuevo Autor que quieres modificar :\n";
+    final static protected String CAMBIAR_PRECIO          = "Introduce el nuevo Precio que quieres modificar :\n";
+    final static protected String CAMBIAR_ALTURA          = "Introduce la nueva Altura que quieres modificar :\n";
+    final static protected String CAMBIAR_PESO            = "Introduce el nuevo Peso que quieres modificar :\n";
+    final static protected String CAMBIAR_NºPIEZAS        = "Introduce el nuevo NºPiezas que quieres modificar :\n";
+    final static protected String CAMBIAR_DESCRIPCION     = "Introduce la nueva Descripcion que quieres modificar :\n";
+    final static protected String OPCION0_MENU            = "¿Qué obra quieres visualizar?, Introduce su ID : ";
+    final static protected String OPCION4_MENU            = "¿De qué obra quieres saber precio?, Introduce su ID : ";
+    final static protected String OPCION5_MENU            = "¿Qué obra quieres imprimir?, Introduce su ID : ";
+    final static protected String VOLVER_MENU             = TEXTO_VERDE + "Pulsa 'ENTER' para volver al menu..."+  TEXTO_BLANCO + FILTER_INVISIBLE;
+    final static protected String SALIR                   = "\nGRACIAS POR UTILIZAR NUESTRA APLICACION!!";
+    final static protected String ERROR_MENU              = TEXTO_ROJO+"\nLA OPCION ESCOGIDA ES INCORRECTA, PRUEBA A ESCOGER DEL (0-6)";
+    final static protected String TEX_MOSTRAR_TODAS_OBRAS = "\n=====> Mostrando Obras <======\n";
+    final static protected String MOSTRAR_OBRA_STRING     = "\n=====> MOSTRANDO OBRA <====== \n\n";
+    final static protected String ETIQUETA_STRING         = "\n===>ETIQUETA<===\n\n";
+    final static protected String PRECIO_VENTA_STRING     = "\n===>PRECIO DE VENTA<===\n\n";
+    final static protected String NOMBRE_TODAS_OBRAS      = TEXTO_CYAN + "Nombre: " + TEXTO_BLANCO;
+    final static protected String ID_TODAS_OBRAS          = TEXTO_AMARILLO+"\nID: " + TEXTO_BLANCO + "🔒";
+    final static protected String HIERRO                  = "HIERRO";
+    final static protected String COBRE                   = "COBRE";
+    final static protected String ACERO                   = "ACERO";
+    final static protected String CARBONCILLO             = "CARBONCILLO";
+    final static protected String ACUARELA                = "ACUARELA";
+    final static protected String OLEO                    = "OLEO";
     
     
-    final static private int COMISION_GALERIA_PERCENT   = 25;
+    final static protected int COMISION_GALERIA_PERCENT   = 25;
 
     //*CASOS SWITCH MODIFICAR OBRAS
 
@@ -101,7 +101,7 @@ public class Galeria {
     final static private int CASE_MENU_IMPR_ETIQUETA    = 5;
     final static private int CASE_MENU_SALIR            = 6;
     
-    final static private double CONVERSOR_DOLARES      = 0.99;
+    final static protected double CONVERSOR_DOLARES      = 0.99;
 
     //ATRIBUTOS
     private static ArrayObras obrasGuardadas            = new ArrayObras();
@@ -259,7 +259,7 @@ public class Galeria {
                     System.out.println(mostrarObra(obrasGuardadas.getObra(obraEscogida)));
                     volverAlMenu();
                 } 
-         }catch(IndexOutOfBoundsException ioobe){
+        }catch(IndexOutOfBoundsException ioobe){
             System.out.println(ERROR_ID_SOLCITADO);
             volverAlMenu();
         }

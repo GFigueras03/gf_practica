@@ -37,8 +37,34 @@ public class AppTest {
     }
 
     @Test 
-    void getDescuentoTest(){
+    void getDescuentoPorAlturaTest(){
         int expexted = 100 * obra1.getnPiezas();
         assertEquals(expexted, obra1.calcularPrecioAltura());
     }
+
+    @Test
+    void calcularPrecio(){
+        ObraDeArte obraExample = obra1;
+        double comisionGaleriaEuros = ((obraExample.getPrecio() * Galeria.COMISION_GALERIA_PERCENT) / 100);
+        int importePeso             = obraExample.calcularPrecioPeso();
+        int importeAltura           = obraExample.calcularPrecioAltura();
+        int importePlusPiezas       = obraExample.calcularPlusPiezas();
+
+        double expected = obraExample.getPrecio();
+        expected += comisionGaleriaEuros;
+        expected += importeAltura;
+        expected += importePeso;
+        expected += importePlusPiezas;
+
+        assertEquals(expected, Galeria.obtenerPrecioVenta(obraExample));
+    }
+
+    @Test
+    void calcularPrecioFinalVentaTest(){
+        double expexted = Galeria.obtenerPrecioVenta(obra1) - obra1.calcularDescuento(Galeria.obtenerPrecioVenta(obra1));
+        expexted *= Galeria.CONVERSOR_DOLARES;
+
+        assertEquals(expexted, Galeria.calcularPrecioFinalVenta(obra1));
+    }
+
 }
