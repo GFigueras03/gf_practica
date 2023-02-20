@@ -1,4 +1,6 @@
 package com.daw.gfigueras;
+import static com.daw.gfigueras.Constantes.*;
+
 
 public abstract class ObraDeArte {
     //!CONSTANTES
@@ -7,8 +9,8 @@ public abstract class ObraDeArte {
     final private int ALTURA_PRECIO_MAX          = 100;
     final private int ALTURA_PRECIO_MIN          = 20;
     final private int ALTURA_PIEZAS_TOPE         = 2;
-    final private String PLUS_PIEZAS_TEXTO       = Galeria.TEXTO_CYAN + "Importe adicional - Pieza " + Galeria.TEXTO_AMARILLO;
-    final private String PLUS_PIEZAS_TEXTO_DOS   = Galeria.TEXTO_CYAN + " (EUR): "+Galeria.TEXTO_POR_DEFECTO + "10\n";
+    final private String PLUS_PIEZAS_TEXTO       = TEXTO_CYAN + "Importe adicional - Pieza " + TEXTO_AMARILLO;
+    final private String PLUS_PIEZAS_TEXTO_DOS   = TEXTO_CYAN + " (EUR): "+TEXTO_POR_DEFECTO + "10\n";
     
     //!ATRIBUTES
     protected int id;

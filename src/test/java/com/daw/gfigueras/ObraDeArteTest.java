@@ -21,7 +21,7 @@ public class ObraDeArteTest {
     Escultura obra5  ;
 
     @BeforeEach
-    void crearTiempo(){
+    void crearObra(){
        obra1 = new Pintura(001, 1000.0, 5.0, 2.0, 5, "Pintura", "Guernica","P.Picasso", "Cuadro Guerra civil", "Oleo"); 
        obra2 = new Pintura(002, 200.0, 1.0, 1.0, 1, "Pintura",  "La Vie","P.Picasso", "Pintura de Oleo", "Oleo"); 
        obra3 = new Pintura(003, 300.0, 1.4, 1.0, 1, "Pintura",  "El Sueño","P.Picasso", "Pintura de Acuarela", "Acuarela"); 
@@ -30,7 +30,7 @@ public class ObraDeArteTest {
     }
 
     @AfterEach
-    void borrarTiempo(){
+    void borrarObra(){
         obra1 = null;
         obra2 = null;
         obra3 = null;
