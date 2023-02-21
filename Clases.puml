@@ -1,0 +1,50 @@
+@startuml Galeria
+package com.daw.gfigueras {
+   abstract class ObraDeArte{
+    # id: int
+    # int nºPiezas
+    #  precio: double
+    #  altura: double
+    #  peso: double
+    #  tipo: String
+    #  autor: String
+    #  nombre: String
+    #  descripcion: String
+
+    + ObradeArte();
+
+    + getId(): int
+    + getNºPiezas(): int
+    + getPrecio(): double
+    + getAltura(): double
+    + getPeso(): double
+    + getTipo(): String
+    + getAutor(): String
+    + getNombre(): String
+    + getDescripcion(): String
+
+    + setNºPiezas(): void 
+    + setPrecio(): void 
+    + setAltura(): void 
+    + setPeso(): void 
+    + setTipo(): void 
+    + setAutor(): void 
+    + setNombre(): void 
+    + setDescripcion(): void 
+
+    + {abstract} calcularDescuento(double precio):  double
+    + {abstract} getDescuento(double precio):  double
+
+    + toString(): String
+    + imprimirImporteAdiccional(): String
+    + calcularPrecioAltura(): int 
+    + calcularPrecioPeso(): int 
+    + calcularPlusPiezas(): int 
+}
+
+class Escultura{
+    +nombre: int;
+}  
+}
+
+@enduml
