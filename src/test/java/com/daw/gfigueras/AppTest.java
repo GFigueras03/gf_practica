@@ -1,10 +1,8 @@
 package com.daw.gfigueras;
-/**
- * Unit test for simple App.
- */
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static com.daw.gfigueras.Constantes.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,7 +43,7 @@ public class AppTest {
     @Test
     void calcularPrecio(){
         ObraDeArte obraExample = obra1;
-        double comisionGaleriaEuros = ((obraExample.getPrecio() * Galeria.COMISION_GALERIA_PERCENT) / 100);
+        double comisionGaleriaEuros = ((obraExample.getPrecio() * COMISION_GALERIA_PERCENT) / 100);
         int importePeso             = obraExample.calcularPrecioPeso();
         int importeAltura           = obraExample.calcularPrecioAltura();
         int importePlusPiezas       = obraExample.calcularPlusPiezas();
@@ -62,7 +60,7 @@ public class AppTest {
     @Test
     void calcularPrecioFinalVentaTest(){
         double expexted = Galeria.obtenerPrecioVenta(obra1) - obra1.calcularDescuento(Galeria.obtenerPrecioVenta(obra1));
-        expexted *= Galeria.CONVERSOR_DOLARES;
+        expexted *= CONVERSOR_DOLARES;
 
         assertEquals(expexted, Galeria.calcularPrecioFinalVenta(obra1));
     }
