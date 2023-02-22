@@ -1,0 +1,114 @@
+@startuml Galeria
+package com.daw.gfigueras {
+    class Galeria{
+    -obrasGuardadas[]: ArrayObras
+    -menu: boolean
+
+    +main(): void
+    +{static}ejecutarMenu(): void
+    +{static}darAltaObra(): ObraDeArte
+    +{static}calcularId(): int
+    +{static}checkTecnica(String tecnica): void
+    +{static}checkMaterial(String material): void
+    +{static}volverAlMenu(): void
+    +{static}menuMostrarTodasLasObras(): void
+    +{static}menuVisualizarDatos(): void
+    +{static}menuObtenerPrecio(): void
+    +{static}menuMostrarEtiqueta(): void
+    +{static}obtenerPrecioVenta(ObraDeArte obra): double
+    +{static}calcularPrecioFinalVenta(ObraDeArte obra): double
+    +{static}modificarDatos(): void
+    +{static}mostrarObra(ObraDeArte obra): String
+    +{static}obtenerTicket(ObraDeArte obra): String
+    +{static}obtenerPrecioVentaEtiqueta(ObraDeArte obra, double descuento): String
+    +{static}imprimirString(String texto): String
+    +{static}imprimirInteger(String texto): int
+    +{static}imprimirDouble(String texto): double
+
+}
+    class Constantes{
+        //ESTA CLASE CONTIENE TODAS LAS CONSTANTES DE GALERIA
+    }
+   abstract class ObraDeArte{
+    -  PESO_PRECIO_MAX: int
+    -  PESO_PRECIO_MIN: int
+    -  ALTURA_PRECIO_MAX: int
+    -  ALTURA_PRECIO_MIN: int
+    -  ALTURA_PIEZAS_TOPE: int
+    
+    #  id: int
+    #  int nºPiezas
+    #  precio: double
+    #  altura: double
+    #  peso: double
+    #  tipo: String
+    #  autor: String
+    #  nombre: String
+    #  descripcion: String
+
+    + ObradeArte()
+    + getId(): int
+    + getNºPiezas(): int
+    + getPrecio(): double
+    + getAltura(): double
+    + getPeso(): double
+    + getTipo(): String
+    + getAutor(): String
+    + getNombre(): String
+    + getDescripcion(): String
+    + setNpiezas(int nPiezas): void 
+    + setPrecio(double precio): void 
+    + setAltura(double altura): void 
+    + setPeso(double preso): void 
+    + setTipo(String tipo): void 
+    + setAutor(String autor): void 
+    + setNombre(String nombre): void 
+    + setDescripcion(String descripcion): void 
+    + {abstract} calcularDescuento(double precio):  double
+    + {abstract} getDescuento(double precio):  double
+    + toString(): String
+    + imprimirImporteAdiccional(): String
+    + calcularPrecioAltura(): int 
+    + calcularPrecioPeso(): int 
+    + calcularPlusPiezas(): int 
+}
+
+class Escultura extends ObraDeArte{
+    -DESCUENTO: double
+    -tecnica: String
+
+    +Escultura()
+    +getTecnica(): String
+    +setTecnica(String tecnica): void
+    +toString(): String
+    }
+
+class Pintura extends ObraDeArte{
+    -DESCUENTO: double
+    -material: String
+
+    +Pintura()
+    +getMaterial(): String
+    +setMaterial(String material): void
+    +toString(): String
+    }  
+class ArrayObras{
+    - TAM_INICIAL: int
+    - ObraDeArte[]: obrasGuardadas
+    - tamAlmacen: int
+    - ultimaObraGuardada: int
+    + ArrayObras()
+    + push(ObraDeArte obra): void
+    + cambiarTam(int size): ObraDeArte[]
+    + getObrasGuardadas(): String
+    + getObra(int index): ObraDeArte
+    + getTan(): int 
+}   
+
+
+
+
+ArrayObras o-- ObraDeArte
+}
+
+@enduml

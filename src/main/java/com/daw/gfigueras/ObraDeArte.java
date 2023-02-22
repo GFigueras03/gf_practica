@@ -1,14 +1,16 @@
 package com.daw.gfigueras;
+import static com.daw.gfigueras.Constantes.*;
+
 
 public abstract class ObraDeArte {
     //!CONSTANTES
-    final static private int PESO_PRECIO_MAX            = 100;
-    final static private int PESO_PRECIO_MIN            = 20;
-    final static private int ALTURA_PRECIO_MAX          = 100;
-    final static private int ALTURA_PRECIO_MIN          = 20;
-    final static private int ALTURA_PIEZAS_TOPE         = 2;
-    final static private String PLUS_PIEZAS_TEXTO       = Galeria.TEXTO_CYAN + "Importe adicional - Pieza " + Galeria.TEXTO_AMARILLO;
-    final static private String PLUS_PIEZAS_TEXTO_DOS   = Galeria.TEXTO_CYAN + " (EUR): "+Galeria.TEXTO_POR_DEFECTO + "10\n";
+    final private int PESO_PRECIO_MAX            = 100;
+    final private int PESO_PRECIO_MIN            = 20;
+    final private int ALTURA_PRECIO_MAX          = 100;
+    final private int ALTURA_PRECIO_MIN          = 20;
+    final private int ALTURA_PIEZAS_TOPE         = 2;
+    final private String PLUS_PIEZAS_TEXTO       = TEXTO_CYAN + "Importe adicional - Pieza " + TEXTO_AMARILLO;
+    final private String PLUS_PIEZAS_TEXTO_DOS   = TEXTO_CYAN + " (EUR): "+TEXTO_POR_DEFECTO + "10\n";
     
     //!ATRIBUTES
     protected int id;
@@ -119,7 +121,7 @@ public abstract class ObraDeArte {
                 + peso + ", nombre=" + nombre + ", autor=" + autor + ", descripcion=" + descripcion;
     }
     
-    public int calcularPrecioPeso() { // METODO QUE DEVUELVE BOOLEAN SEGUN PESO
+    public int calcularPrecioPeso() {
         if ((this.peso * 1000) >= 1) {
             return PESO_PRECIO_MAX;
         } else {
@@ -127,7 +129,7 @@ public abstract class ObraDeArte {
         }
     }
 
-    public int calcularPrecioAltura() { // METODO QUE DEVUELVE BOOLEAN SEGUN ALTURA
+    public int calcularPrecioAltura() {
         if ((this.altura >= ALTURA_PIEZAS_TOPE)) {
             return ALTURA_PRECIO_MAX * this.nPiezas;
         } else {
@@ -135,15 +137,15 @@ public abstract class ObraDeArte {
         }
     }
 
-    public int calcularPlusPiezas() { // METODO QUE CALCULA PRECIO EXTRA POR MAS DE 2 PIEZAS
+    public int calcularPlusPiezas() {
         int plusPiezas = 0;
-        if (this.nPiezas > ALTURA_PIEZAS_TOPE) { // INCREMENTO NºPIEZAS
+        if (this.nPiezas > ALTURA_PIEZAS_TOPE) {
             plusPiezas += (plusPiezas + ((this.nPiezas - 2) * 10));
         }
         return plusPiezas;
     }
 
-    public String imprimirImporteAdiccional() {// IMPRIMIR N VECES TEXTO PIEZAS PARA ETIQUETA
+    public String imprimirImporteAdiccional() {
         String texto = "";
         int comienzoPlusPiezas = 3;
         if (this.nPiezas > 2) {
