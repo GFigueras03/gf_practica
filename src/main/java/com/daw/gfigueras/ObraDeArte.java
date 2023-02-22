@@ -121,7 +121,7 @@ public abstract class ObraDeArte {
                 + peso + ", nombre=" + nombre + ", autor=" + autor + ", descripcion=" + descripcion;
     }
     
-    public int calcularPrecioPeso() { // METODO QUE DEVUELVE BOOLEAN SEGUN PESO
+    public int calcularPrecioPeso() {
         if ((this.peso * 1000) >= 1) {
             return PESO_PRECIO_MAX;
         } else {
@@ -129,7 +129,7 @@ public abstract class ObraDeArte {
         }
     }
 
-    public int calcularPrecioAltura() { // METODO QUE DEVUELVE BOOLEAN SEGUN ALTURA
+    public int calcularPrecioAltura() {
         if ((this.altura >= ALTURA_PIEZAS_TOPE)) {
             return ALTURA_PRECIO_MAX * this.nPiezas;
         } else {
@@ -137,15 +137,15 @@ public abstract class ObraDeArte {
         }
     }
 
-    public int calcularPlusPiezas() { // METODO QUE CALCULA PRECIO EXTRA POR MAS DE 2 PIEZAS
+    public int calcularPlusPiezas() {
         int plusPiezas = 0;
-        if (this.nPiezas > ALTURA_PIEZAS_TOPE) { // INCREMENTO NºPIEZAS
+        if (this.nPiezas > ALTURA_PIEZAS_TOPE) {
             plusPiezas += (plusPiezas + ((this.nPiezas - 2) * 10));
         }
         return plusPiezas;
     }
 
-    public String imprimirImporteAdiccional() {// IMPRIMIR N VECES TEXTO PIEZAS PARA ETIQUETA
+    public String imprimirImporteAdiccional() {
         String texto = "";
         int comienzoPlusPiezas = 3;
         if (this.nPiezas > 2) {

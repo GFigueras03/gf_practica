@@ -251,7 +251,7 @@ public class Galeria {
                         menu = false;
                         break;
 
-                    case CASE_MOD_TIPO:
+                    case CASE_MOD_TIPO: // MODIFICAMOS TIPO CHECKEANDO Y CAMBIANDO LA TECNICA/MATERIAL
                         if (obrasGuardadas.getObra(idPedido).getTipo().toUpperCase().equals(CHECK_ESCULTURA) || 
                             obrasGuardadas.getObra(idPedido).getTipo().toUpperCase().equals(CHECK_PINTURA)) {
                                 
