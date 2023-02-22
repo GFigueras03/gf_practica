@@ -33,7 +33,7 @@ public class ArrayObras {
     public String getObrasGuardadas() {
         String msg = "";
         for(int i = 0; i< tamAlmacen; i++){
-            msg = obrasGuardadas[i].getNombre() + "\n";
+            msg += obrasGuardadas[i].getNombre() + "\n";
         }
         return msg;
     }
