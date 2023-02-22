@@ -42,7 +42,7 @@ package com.daw.gfigueras {
     + calcularPlusPiezas(): int 
 }
 
-class Escultura{
+class Escultura extends ObraDeArte{
     +nombre: int;
 }  
 }
